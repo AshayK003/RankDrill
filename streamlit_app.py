@@ -122,6 +122,15 @@ with tab_rank:
                             top_cos = sorted(h["companies"].items(), key=lambda kv: -kv[1])[:3]
                             st.caption("Asked by: " + ", ".join(f"{c} ({n:.0f})" for c, n in top_cos))
                         st.link_button("Practice", h["link"])
+                        with st.expander("Solved it? Do next", expanded=False):
+                            nxt = rec.do_next(problems, h["id"], top_n=3)
+                            if not nxt:
+                                st.caption("No co-asked problems found.")
+                            for n in nxt:
+                                st.caption(
+                                    f"{n['title']} [{n['difficulty']}] · "
+                                    f"also asked by {', '.join(n['shared'][:2])}"
+                                )
                     st.download_button(
                         "Download prep checklist",
                         data=rec.to_checklist(query.strip(), company.strip(), method, hits),

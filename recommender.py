@@ -425,6 +425,34 @@ def roadmap(problems, companies, targets, per_topic=3):
     return {"resolved": resolved, "unresolved": unresolved, "topics": topics}
 
 
+def do_next(problems, problem_id, top_n=5):
+    """Problems co-asked with the given one, by shared-company overlap (pure).
+
+    Score = sum over shared companies of min(freq). Returns
+    [{id,title,difficulty,link,score,shared[companies]}] minus self, or [].
+    """
+    by_id = {p["id"]: p for p in problems}
+    if problem_id not in by_id:
+        return []
+    base = by_id[problem_id].get("companies") or {}
+    ranked = []
+    for p in problems:
+        if p["id"] == problem_id:
+            continue
+        shared = [c for c in (p.get("companies") or {}) if c in base]
+        if not shared:
+            continue
+        score = sum(min(base[c], p["companies"][c]) for c in shared)
+        ranked.append({
+            "id": p["id"], "title": p["title"],
+            "difficulty": p.get("difficulty", "?"), "link": p.get("link", ""),
+            "score": round(score, 1),
+            "shared": sorted(shared, key=lambda c: -min(base[c], p["companies"][c])),
+        })
+    ranked.sort(key=lambda h: -h["score"])
+    return ranked[:top_n]
+
+
 def recommend(query, top_k=10, company=None, method="bm25"):
     """Rank problems for a raw query string. Returns ranked hit dicts."""
     if isinstance(method, str) and method.lower() in ("bm25", "tfidf"):

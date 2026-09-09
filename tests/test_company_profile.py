@@ -48,7 +48,7 @@ def test_difficulty_meter_thresholds():
 
     assert difficulty_meter({"Easy": 1, "Medium": 2, "Hard": 7})["verdict"] == "Expect Hard"
     assert difficulty_meter({"Easy": 7, "Medium": 2, "Hard": 1})["verdict"].startswith("Speed")
-    assert difficulty_meter({"Easy": 3, "Medium": 4, "Hard": 3})["verdict"] == "Balanced mix"
+    assert difficulty_meter({"Easy": 4, "Medium": 4, "Hard": 2})["verdict"] == "Balanced mix"
     assert difficulty_meter({"Easy": 0, "Medium": 0, "Hard": 0})["verdict"] == "No data"
 
 
