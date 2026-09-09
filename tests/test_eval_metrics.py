@@ -1,6 +1,6 @@
 """Tests for eval metrics (hand-computed expectations)."""
 
-from eval import precision_at_k, recall_at_k, reciprocal_rank
+from eval import mean_ci, precision_at_k, recall_at_k, reciprocal_rank
 
 
 def test_precision():
@@ -17,3 +17,11 @@ def test_recall():
 def test_reciprocal_rank():
     assert reciprocal_rank(["x", "a"], ["a"]) == 0.5
     assert reciprocal_rank(["x"], ["a"]) == 0.0
+
+
+def test_mean_ci():
+    mean, ci = mean_ci([1.0, 1.0, 1.0, 1.0])
+    assert (mean, ci) == (1.0, 0.0)
+    mean, ci = mean_ci([0.0, 1.0])
+    assert mean == 0.5 and 0.6 < ci < 1.1
+    assert mean_ci([]) == (0.0, 0.0)

@@ -4,6 +4,20 @@ Relevance here is topic-level: a retrieved problem is relevant when its topics
 overlap the query's labelled relevant_topics.
 """
 
+import math
+
+
+def mean_ci(values):
+    """Mean and 95% CI half-width (1.96·std/sqrt(n)). (0.0, 0.0) when empty."""
+    n = len(values)
+    if not n:
+        return 0.0, 0.0
+    mean = sum(values) / n
+    if n == 1:
+        return round(mean, 3), 0.0
+    var = sum((v - mean) ** 2 for v in values) / (n - 1)
+    return round(mean, 3), round(1.96 * math.sqrt(var / n), 3)
+
 
 def precision_at_k(retrieved_ids, relevant_ids, k):
     """Fraction of top-k retrieved that is relevant. Returns 0.0 when k is 0."""
@@ -49,7 +63,11 @@ def evaluate(recommend_fn, problems, queries, k=5):
             f"r@{k}": round(recall_at_k(retrieved, relevant, k), 3),
             "mrr": round(reciprocal_rank(retrieved, relevant), 3),
         })
-    summary = {m: round(sum(r[m] for r in rows) / len(rows), 3) for m in rows[0] if m != "id"} if rows else {}
+    metrics = [m for m in rows[0] if m != "id"] if rows else []
+    summary = {}
+    for m in metrics:
+        mean, ci = mean_ci([r[m] for r in rows])
+        summary[m] = {"mean": mean, "ci": ci}
     return {"rows": rows, "summary": summary, "k": k}
 
 
