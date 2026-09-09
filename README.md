@@ -15,9 +15,10 @@ companies asked it recently, and the fresher pay band where verified.
   window") and get targeted problems.
 - **Company-aware** — a company named in the JD is detected automatically
   ("JPMorgan" resolves to "J.P. Morgan"); problems it asks frequently rank higher.
-- **Salary context** — verified 2026 fresher bands for 12 companies, shown beside results.
+- **Salary context** — verified 2026 fresher bands for 23 companies, shown beside results.
 - **Transparent** — every hit lists matched terms and typo corrections. No black-box scores.
 - **Typo-tolerant** — misspellings fall back to the closest corpus term by edit distance.
+- **Company roadmaps** — pick target companies, get topics ordered by what they ask.
 
 ## Quick start
 
@@ -74,7 +75,7 @@ eval.py             P@5 / R@5 / MRR harness + runner
 streamlit_app.py    dashboard (thin surface over the engine)
 data/build_corpus.py  corpus builder (download → merge → problems.json)
 data/seeds/         frozen eval labels, seed problems, salary bands
-tests/              40 tests, all passing
+tests/              47 tests, all passing
 ```
 
 ## License

@@ -40,7 +40,7 @@ except FileNotFoundError:
     st.error("Corpus not built yet. Run `python data/build_corpus.py` first.")
     st.stop()
 
-tab_rank, tab_company = st.tabs(["Recommend", "Company patterns"])
+tab_rank, tab_company, tab_roadmap = st.tabs(["Recommend", "Company patterns", "Roadmaps"])
 
 with tab_rank:
     _EXAMPLES = {
@@ -149,3 +149,21 @@ with tab_company:
         for p in prof["top_problems"]:
             st.caption(f"{p['title']} [{p['difficulty']}] · asked {p['frequency']:.0f}")
             st.link_button("Practice", p["link"])
+
+with tab_roadmap:
+    st.caption("Pick target companies — topics order by what they actually ask.")
+    all_names = sorted({c for p in problems for c in (p.get("companies") or {})})
+    default = [n for n in ("tcs", "Infosys", "Google") if n in all_names]
+    targets = st.multiselect("Target companies", all_names, default=default)
+    per_topic = st.slider("Problems per topic", 1, 10, 3)
+    if not targets:
+        st.warning("Select at least one company.")
+    else:
+        rm = rec.roadmap(problems, companies, targets, per_topic=per_topic)
+        if rm["unresolved"]:
+            st.caption("Skipped (no data): " + ", ".join(rm["unresolved"]))
+        for i, t in enumerate(rm["topics"], start=1):
+            st.subheader(f"{i}. {t['topic']}")
+            for p in t["problems"]:
+                st.caption(f"{p['title']} [{p['difficulty']}] · asked {p['frequency']:.0f}")
+                st.link_button("Practice", p["link"])

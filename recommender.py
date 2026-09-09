@@ -358,6 +358,51 @@ def company_profile(problems, companies, company, top_n=8, top_k=10):
     }
 
 
+def roadmap(problems, companies, targets, per_topic=3):
+    """Order topics by summed ask-frequency across target companies (pure).
+
+    Returns {resolved[stored names], unresolved[input names],
+    topics[{topic, weight, problems[{id,title,difficulty,link,frequency}]}]}.
+    Aliases/tiers resolve to base companies; unknown names are listed, not fatal.
+    """
+    resolved, unresolved = [], []
+    for t in targets:
+        hit = _canonical_company(t, companies) or ""
+        match = next((c["name"] for c in companies
+                      if c["name"] == hit or _squash(c["name"]) == _squash(hit)), None)
+        (resolved if match else unresolved).append(match if match else t)
+    lower = {r.lower() for r in resolved}
+    topic_freq: dict = {}
+    prob_freq: dict = {}
+    for p in problems:
+        w = sum(v for k, v in (p.get("companies") or {}).items() if k.lower() in lower)
+        if w <= 0:
+            continue
+        prob_freq[p["id"]] = w
+        for topic in p.get("topics", []):
+            topic_freq[topic] = topic_freq.get(topic, 0) + w
+    by_id = {p["id"]: p for p in problems}
+    topics = []
+    for topic, weight in sorted(topic_freq.items(), key=lambda kv: -kv[1]):
+        members = sorted(
+            (pid for pid in by_id
+             if topic in by_id[pid].get("topics", []) and pid in prob_freq),
+            key=lambda pid: -prob_freq[pid],
+        )[:per_topic]
+        topics.append({
+            "topic": topic,
+            "weight": round(weight, 1),
+            "problems": [
+                {"id": pid, "title": by_id[pid]["title"],
+                 "difficulty": by_id[pid].get("difficulty", "?"),
+                 "link": by_id[pid].get("link", ""),
+                 "frequency": round(prob_freq[pid], 1)}
+                for pid in members
+            ],
+        })
+    return {"resolved": resolved, "unresolved": unresolved, "topics": topics}
+
+
 def recommend(query, top_k=10, company=None, method="bm25"):
     """Rank problems for a raw query string. Returns ranked hit dicts."""
     if method not in ("bm25", "tfidf"):
