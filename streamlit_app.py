@@ -183,9 +183,21 @@ with tab_resume:
     st.caption("Paste both as plain text (PDF upload not supported). Nothing leaves your browser session — no storage, no accounts.")
     from resume_check import resume_gap
 
+    _RC_EXAMPLE = {
+        "resume": ("Final-year B.Tech project: REST APIs in Python and Django, MySQL database, "
+                   "team of four, deployed on college server. Quick learner, strong communication."),
+        "jd": ("Backend SDE-1: Python, Django, MySQL, Redis caching, Docker deployments, "
+               "AWS, message queues, distributed systems."),
+    }
+    if st.button("Load example", width="stretch"):
+        st.session_state["rc_resume"] = _RC_EXAMPLE["resume"]
+        st.session_state["rc_jd"] = _RC_EXAMPLE["jd"]
+        st.rerun()
+
     rc1, rc2 = st.columns(2)
     with rc1:
-        resume_text = st.text_area("Your resume", height=200, placeholder="Backend projects in Python and Django. MySQL…")
+        resume_text = st.text_area("Your resume", height=200, key="rc_resume",
+                                   placeholder="Backend projects in Python and Django. MySQL…")
     with rc2:
         jd_text = st.text_area("Job description", height=200, key="rc_jd",
                                placeholder="Backend SDE-1: Python, Django, MySQL, Redis, Docker…")
