@@ -300,6 +300,22 @@ def diagnose_query(query):
     return {"usable": usable, "unknown": unknown, "corrections": corrections}
 
 
+def to_checklist(query, company, method, hits):
+    """Render ranked hits as a markdown prep checklist. Pure function."""
+    if not hits:
+        return ""
+    lines = ["# RankDrill prep list", "",
+             f"Query: {query} | Company: {company or '-'} | Ranker: {method}", ""]
+    for h in hits:
+        lines.append(f"- [ ] {h['title']} [{h['difficulty']}]")
+        lines.append(f"  {h['link']}")
+        asked = ", ".join(f"{c} ({n:.0f})" for c, n in
+                          sorted(h.get("companies", {}).items(), key=lambda kv: -kv[1])[:3])
+        if asked:
+            lines.append(f"  asked by: {asked}")
+    return "\n".join(lines) + "\n"
+
+
 def company_profile(problems, companies, company, top_n=8, top_k=10):
     """Aggregate ask-pattern for one company (pure function).
 

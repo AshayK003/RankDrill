@@ -145,6 +145,22 @@ def test_empty_corpus(monkeypatch):
     assert rec.recommend("arrays") == []
 
 
+def test_checklist_format():
+    from recommender import to_checklist
+
+    hits = [{
+        "id": "d1", "title": "Two Sum", "topics": ["Arrays"], "difficulty": "Easy",
+        "link": "https://leetcode.com/problems/two-sum/", "score": 1.5,
+        "matched_terms": ["sum"], "companies": {"Google": 100.0},
+        "salary_band": None, "detected_company": None, "corrections": {},
+    }]
+    md = to_checklist("arrays practice", "Google", "bm25", hits)
+    assert "- [ ] Two Sum" in md
+    assert "https://leetcode.com/problems/two-sum/" in md
+    assert "arrays practice" in md
+    assert to_checklist("q", None, "bm25", []) == ""
+
+
 def test_diagnose_flags_unknown_terms(monkeypatch):
     import recommender as rec
 

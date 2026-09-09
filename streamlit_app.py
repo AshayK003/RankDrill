@@ -121,6 +121,12 @@ with tab_rank:
                             top_cos = sorted(h["companies"].items(), key=lambda kv: -kv[1])[:3]
                             st.caption("Asked by: " + ", ".join(f"{c} ({n:.0f})" for c, n in top_cos))
                         st.link_button("Practice", h["link"])
+                    st.download_button(
+                        "Download prep checklist",
+                        data=rec.to_checklist(query.strip(), company.strip(), method, hits),
+                        file_name="rankdrill-prep.md",
+                        mime="text/markdown",
+                    )
 
 with tab_company:
     names = sorted({c for p in problems for c in (p.get("companies") or {})})

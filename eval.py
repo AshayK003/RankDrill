@@ -44,6 +44,25 @@ def reciprocal_rank(retrieved_ids, relevant_ids):
     return 0.0
 
 
+def dcg_at_k(retrieved_ids, gains, k):
+    """Discounted cumulative gain with graded gains {doc_id: gain}."""
+    total = 0.0
+    for i, doc_id in enumerate(retrieved_ids[:k], start=1):
+        gain = gains.get(doc_id, 0)
+        total += (2 ** gain - 1) / math.log2(i + 1)
+    return total
+
+
+def ndcg_at_k(retrieved_ids, relevant_ids, k):
+    """NDCG with binary gains (relevant = 1). Graded labels slot in later."""
+    gains = {doc_id: 1 for doc_id in relevant_ids}
+    ideal = sorted(gains.values(), reverse=True)
+    idcg = sum((2 ** g - 1) / math.log2(i + 1) for i, g in enumerate(ideal[:k], start=1))
+    if idcg == 0:
+        return 0.0
+    return dcg_at_k(retrieved_ids, gains, k) / idcg
+
+
 def evaluate(recommend_fn, problems, queries, k=5):
     """Run recommend_fn over labelled queries; return per-query rows + macro averages.
 
@@ -62,6 +81,7 @@ def evaluate(recommend_fn, problems, queries, k=5):
             f"p@{k}": round(precision_at_k(retrieved, relevant, k), 3),
             f"r@{k}": round(recall_at_k(retrieved, relevant, k), 3),
             "mrr": round(reciprocal_rank(retrieved, relevant), 3),
+            f"ndcg@{k}": round(ndcg_at_k(retrieved, relevant, k), 3),
         })
     metrics = [m for m in rows[0] if m != "id"] if rows else []
     summary = {}
