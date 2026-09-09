@@ -40,10 +40,25 @@ except FileNotFoundError:
     st.error("Corpus not built yet. Run `python data/build_corpus.py` first.")
     st.stop()
 
+_EXAMPLES = {
+    "Backend SDE-1": "Backend SDE-1 role at Flipkart: Java, Spring Boot, MySQL, Redis caching, message queues, distributed systems, low-latency APIs.",
+    "Frontend": "Frontend developer (React): DOM manipulation, string parsing, state management, palindrome checks, text processing, component performance.",
+    "OA prep": "Product company online assessment: arrays, hashmaps, sliding window, dynamic programming, graphs, binary search.",
+}
+
+st.caption("No JD handy? Try an example:")
+ex_cols = st.columns(3)
+for (label, text), col in zip(_EXAMPLES.items(), ex_cols):
+    with col:
+        if st.button(label, width="stretch"):
+            st.session_state["jd_input"] = text
+            st.rerun()
+
 query = st.text_area(
     "Job description",
     height=150,
     max_chars=MAX_QUERY_CHARS,
+    key="jd_input",
     placeholder="Backend SDE-1 role: REST APIs, caching with Redis, MySQL, distributed systems…",
 )
 col1, col2, col3 = st.columns(3)
