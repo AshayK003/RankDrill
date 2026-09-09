@@ -51,3 +51,35 @@ def evaluate(recommend_fn, problems, queries, k=5):
         })
     summary = {m: round(sum(r[m] for r in rows) / len(rows), 3) for m in rows[0] if m != "id"} if rows else {}
     return {"rows": rows, "summary": summary, "k": k}
+
+
+if __name__ == "__main__":
+    """Run both rankers over frozen seeds; print table, save results/results.json."""
+    import json
+    from pathlib import Path
+
+    from recommender import recommend
+
+    root = Path(__file__).parent
+    with open(root / "data" / "problems.json", encoding="utf-8") as f:
+        problems = json.load(f)
+    with open(root / "data" / "seeds" / "eval_queries.json", encoding="utf-8") as f:
+        queries = json.load(f)
+
+    out = {}
+    for method in ("bm25", "tfidf"):
+        res = evaluate(
+            lambda q, top_k, company, m=method: recommend(q, top_k=top_k, company=company, method=m),
+            problems, queries, k=5,
+        )
+        out[method] = res
+        print(f"--- {method} ---")
+        for row in res["rows"]:
+            print(row)
+        print("summary:", res["summary"])
+
+    results_dir = root / "results"
+    results_dir.mkdir(exist_ok=True)
+    with open(results_dir / "results.json", "w", encoding="utf-8") as f:
+        json.dump(out, f, indent=2)
+    print("saved results/results.json")
