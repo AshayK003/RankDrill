@@ -296,6 +296,46 @@ def diagnose_query(query):
     return {"usable": usable, "unknown": unknown, "corrections": corrections}
 
 
+def company_profile(problems, companies, company, top_n=8, top_k=10):
+    """Aggregate ask-pattern for one company (pure function).
+
+    Returns {name, problem_count, difficulty{Easy,Medium,Hard},
+    top_topics[(topic, freq-sum)], top_problems[id,title,difficulty,link,freq],
+    salary_band} or None when the company has no problems. Name match is
+    case-insensitive; aliases resolve via _canonical_company.
+    """
+    canonical = _canonical_company(company, companies)
+    names = {canonical} if canonical else set()
+    names |= {c["name"] for c in companies
+              if canonical and _squash(c["name"]) == _squash(canonical)}
+    hits = [p for p in problems
+            if any(n in (p.get("companies") or {}) for n in names)]
+    if not hits:
+        return None
+    stored = next((c["name"] for c in companies if c["name"] in names), canonical)
+    freq_of = lambda p: sum(p["companies"][n] for n in names if n in p["companies"])
+    topic_freq: dict = {}
+    for p in hits:
+        for t in p.get("topics", []):
+            topic_freq[t] = topic_freq.get(t, 0) + freq_of(p)
+    ranked = sorted(hits, key=lambda p: -freq_of(p))
+    return {
+        "name": stored,
+        "problem_count": len(hits),
+        "difficulty": {
+            level: sum(1 for p in hits if p.get("difficulty") == level)
+            for level in ("Easy", "Medium", "Hard")
+        },
+        "top_topics": sorted(topic_freq.items(), key=lambda kv: -kv[1])[:top_n],
+        "top_problems": [
+            {"id": p["id"], "title": p["title"], "difficulty": p.get("difficulty", "?"),
+             "link": p.get("link", ""), "frequency": round(freq_of(p), 1)}
+            for p in ranked[:top_k]
+        ],
+        "salary_band": _salary_band(companies, stored),
+    }
+
+
 def recommend(query, top_k=10, company=None, method="bm25"):
     """Rank problems for a raw query string. Returns ranked hit dicts."""
     if method not in ("bm25", "tfidf"):
