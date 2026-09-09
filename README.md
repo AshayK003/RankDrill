@@ -50,8 +50,8 @@ streamlit run streamlit_app.py
 
 | Ranker | P@5 | R@5 | MRR |
 |---|---|---|---|
-| BM25 | 0.533 | 0.023 | 0.70 |
-| TF-IDF | 0.507 | 0.021 | 0.65 |
+| BM25 | 0.560 | 0.024 | 0.617 |
+| TF-IDF | 0.520 | 0.022 | 0.572 |
 
 R@5 is low by construction: relevance labels are topic-overlap, so the relevant set
 spans hundreds of problems at 1,119 docs. P@5 and MRR are the meaningful metrics —
@@ -74,7 +74,7 @@ eval.py             P@5 / R@5 / MRR harness + runner
 streamlit_app.py    dashboard (thin surface over the engine)
 data/build_corpus.py  corpus builder (download → merge → problems.json)
 data/seeds/         frozen eval labels, seed problems, salary bands
-tests/              25 tests, all passing
+tests/              40 tests, all passing
 ```
 
 ## License
