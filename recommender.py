@@ -4,12 +4,15 @@ IR concepts applied (all explainable, zero training):
 - Field-weighted scoring: title tokens count 2x, topic/glossary tokens 1x.
 - Topic glossary: short synonym phrases per topic fix vocabulary mismatch
   ("sliding window" matches even when the title lacks the phrase).
+- Approximate matching: unknown query tokens fall back to the closest corpus term
+  by edit distance (difflib, cutoff 0.8) — typos degrade gracefully, visibly.
 - BM25 Okapi (k1=1.5, b=0.75) and length-normalized TF-IDF, side by side.
 - Company ask-frequency multiplies the lexical score by (1 + ln(1 + freq)).
-- Company auto-detection: a company named in the JD text is picked up
-  without the user selecting it.
+- Company detection is punctuation-proof ("JPMorgan" finds "J.P. Morgan") with a
+  small alias table for true synonyms ("fb" -> "Meta").
 """
 
+import difflib
 import json
 import math
 import re
@@ -21,6 +24,14 @@ TOKEN_RE = re.compile(r"[a-z0-9]+")
 K1 = 1.5
 B = 0.75
 TITLE_WEIGHT = 2
+FUZZY_CUTOFF = 0.8
+
+# True synonyms only — spelling/punctuation variants are handled generically.
+COMPANY_ALIASES = {
+    "fb": "Meta",
+    "facebook": "Meta",
+    "tata consultancy": "tcs",
+}
 
 TOPIC_GLOSSARY = {
     "arrays": "array list index elements subarray",
@@ -135,6 +146,29 @@ def _bm25_scores(qtokens, doc_tokens, df, n, avgdl):
     return scores
 
 
+def _squash(text):
+    """Lowercase alphanumeric only — 'J.P. Morgan' -> 'jpmorgan'."""
+    return re.sub(r"[^a-z0-9]", "", text.lower())
+
+
+def _correct_typos(qtokens, df):
+    """Map unknown tokens to the closest corpus term (edit distance).
+
+    Returns (tokens, corrections). Unknown tokens with no close match are dropped.
+    """
+    vocab = list(df)
+    fixed, corrections = [], {}
+    for t in qtokens:
+        if t in df:
+            fixed.append(t)
+            continue
+        close = difflib.get_close_matches(t, vocab, n=1, cutoff=FUZZY_CUTOFF)
+        if close:
+            fixed.append(close[0])
+            corrections[t] = close[0]
+    return fixed, corrections
+
+
 def _boost(score, problem, company):
     if not company:
         return score
@@ -144,11 +178,38 @@ def _boost(score, problem, company):
     return score
 
 
-def _detect_company(query, companies):
-    """Return a company name when the query text names one, else None."""
-    lowered = query.lower()
+def _canonical_company(name, companies):
+    """Resolve aliases and punctuation variants to the stored company name."""
+    if not name:
+        return None
+    lowered = name.lower().strip()
+    if lowered in COMPANY_ALIASES:
+        return COMPANY_ALIASES[lowered]
+    squashed = _squash(lowered)
     for c in companies:
-        if c["name"].lower() in lowered:
+        if c["name"].lower() == lowered or _squash(c["name"]) == squashed:
+            return c["name"]
+    return name
+
+
+def _detect_company(query, companies):
+    """Return a company name when the query text names one, else None.
+
+    Word-boundary match on spaced text first ("meta" must not fire on "metal");
+    squashed match second so punctuation variants ("JPMorgan") still resolve.
+    """
+    spaced = " " + re.sub(r"[^a-z0-9]+", " ", query.lower()) + " "
+    nospace = _squash(query)
+    for alias, canonical in COMPANY_ALIASES.items():
+        if f" {alias} " in spaced:
+            return canonical
+    for c in companies:
+        name = c["name"].lower()
+        if f" {name} " in spaced:
+            return c["name"]
+    for c in companies:
+        squashed = _squash(c["name"])
+        if len(squashed) > 4 and squashed in nospace:
             return c["name"]
     return None
 
@@ -166,14 +227,23 @@ def recommend(query, top_k=10, company=None, method="bm25"):
     """Rank problems for a raw query string. Returns ranked hit dicts."""
     if method not in ("bm25", "tfidf"):
         raise ValueError(f"unknown method: {method}")
+    if top_k is None or top_k < 1:
+        return []
     qtokens = preprocess(query)
     if not qtokens:
         return []
     problems, companies = _load_corpus()
+    if not problems:
+        return []
     if company is None and isinstance(query, str):
         company = _detect_company(query, companies)
+    else:
+        company = _canonical_company(company, companies)
     by_id = {p["id"]: p for p in problems}
     doc_tokens, df, n, avgdl = _corpus_stats(problems)
+    qtokens, corrections = _correct_typos(qtokens, df)
+    if not qtokens:
+        return []
     if method == "bm25":
         scores = _bm25_scores(qtokens, doc_tokens, df, n, avgdl)
     else:
@@ -197,5 +267,6 @@ def recommend(query, top_k=10, company=None, method="bm25"):
             "companies": p.get("companies", {}),
             "salary_band": _salary_band(companies, company),
             "detected_company": company,
+            "corrections": corrections,
         })
     return hits

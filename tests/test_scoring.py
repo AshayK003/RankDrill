@@ -99,3 +99,36 @@ def test_unknown_method_rejected(monkeypatch):
     monkeypatch.setattr(rec, "_load_corpus", lambda: (DOCS, {}))
     with pytest.raises(ValueError):
         rec.recommend("arrays", method="pagerank")
+
+
+def test_typo_tolerance(monkeypatch):
+    import recommender as rec
+
+    monkeypatch.setattr(rec, "_load_corpus", lambda: (DOCS, {}))
+    hits = rec.recommend("ararys", top_k=5, method="bm25")
+    assert hits, "typo 'ararys' should still match"
+    assert "arrays" in hits[0]["matched_terms"]
+
+
+def test_company_alias_resolves(monkeypatch):
+    import recommender as rec
+
+    monkeypatch.setattr(rec, "_load_corpus",
+                        lambda: (DOCS, [{"name": "J.P. Morgan", "band_label": "X"}]))
+    hits = rec.recommend("JPMorgan backend role with graphs", top_k=2, method="bm25")
+    assert hits and hits[0]["detected_company"] == "J.P. Morgan"
+
+
+def test_top_k_guards(monkeypatch):
+    import recommender as rec
+
+    monkeypatch.setattr(rec, "_load_corpus", lambda: (DOCS, {}))
+    assert rec.recommend("arrays", top_k=0) == []
+    assert rec.recommend("arrays", top_k=-3) == []
+
+
+def test_empty_corpus(monkeypatch):
+    import recommender as rec
+
+    monkeypatch.setattr(rec, "_load_corpus", lambda: ([], []))
+    assert rec.recommend("arrays") == []
