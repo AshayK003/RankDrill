@@ -22,6 +22,10 @@ TARGET_COMPANIES = [
     "Swiggy", "Zomato", "PhonePe", "razorpay", "CRED", "Groww",
     # Mass recruiters (highest placement volume in India).
     "tcs", "Infosys", "Wipro", "Cognizant", "Accenture", "HCL", "Tech Mahindra",
+    # Consulting + banks + hardware + enterprise (MUJ placement season regulars).
+    "Deloitte", "EY", "Pwc", "Goldman Sachs", "J.P. Morgan", "Morgan Stanley",
+    "Samsung", "Adobe", "Oracle", "SAP", "Cisco", "IBM", "Dell", "Bosch",
+    "ZS Associates", "Paytm", "Capgemini", "Larsen & Toubro",
 ]
 # Note: dir names are case-sensitive upstream ("razorpay" is lowercase there).
 # Udaan has no upstream dir — it stays in companies.json (salary display) only.
