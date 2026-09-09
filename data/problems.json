@@ -17,7 +17,9 @@
       "TCS": 100.0,
       "Infosys": 100.0,
       "Cognizant": 76.3,
+      "Tech Mahindra": 100.0,
       "Deloitte": 100.0,
+      "Pwc": 100.0,
       "Goldman Sachs": 44.8,
       "Samsung": 100.0,
       "Oracle": 91.2,
@@ -123,6 +125,7 @@
       "Microsoft": 56.9,
       "Meta": 75.5,
       "TCS": 53.1,
+      "Pwc": 73.6,
       "Goldman Sachs": 70.6
     }
   },
@@ -167,6 +170,7 @@
       "TCS": 69.7,
       "Infosys": 92.6,
       "Accenture": 75.0,
+      "Tech Mahindra": 100.0,
       "Goldman Sachs": 53.1,
       "Adobe": 74.3,
       "IBM": 70.1
@@ -206,8 +210,10 @@
       "Meta": 53.5,
       "TCS": 73.5,
       "Infosys": 67.9,
+      "Pwc": 83.3,
       "IBM": 60.1,
-      "Capgemini": 82.5
+      "Capgemini": 82.5,
+      "Larsen & Toubro": 71.1
     }
   },
   {
@@ -248,7 +254,8 @@
       "Flipkart": 57.1,
       "TCS": 84.4,
       "Infosys": 67.9,
-      "Goldman Sachs": 44.8
+      "Goldman Sachs": 44.8,
+      "ZS Associates": 88.4
     }
   },
   {
@@ -343,7 +350,8 @@
       "Microsoft": 60.8,
       "Meta": 74.5,
       "TCS": 60.0,
-      "IBM": 91.1
+      "IBM": 91.1,
+      "ZS Associates": 88.4
     }
   },
   {
@@ -416,7 +424,8 @@
       "Microsoft": 72.6,
       "Meta": 64.0,
       "TCS": 79.5,
-      "Infosys": 96.5
+      "Infosys": 96.5,
+      "Tech Mahindra": 100.0
     }
   },
   {
@@ -435,6 +444,7 @@
       "Microsoft": 54.7,
       "Meta": 56.1,
       "TCS": 82.1,
+      "Pwc": 73.6,
       "IBM": 60.1
     }
   },
@@ -514,6 +524,7 @@
       "Amazon": 72.0,
       "Microsoft": 70.5,
       "Meta": 67.1,
+      "Razorpay": 64.5,
       "Infosys": 88.1,
       "Goldman Sachs": 63.6,
       "Morgan Stanley": 83.1,
@@ -676,6 +687,7 @@
       "Amazon": 80.2,
       "Microsoft": 70.5,
       "Meta": 58.4,
+      "Razorpay": 90.4,
       "Goldman Sachs": 59.0,
       "Adobe": 100.0,
       "Oracle": 100.0
@@ -815,6 +827,7 @@
       "Amazon": 45.1,
       "Microsoft": 52.3,
       "Meta": 58.4,
+      "Razorpay": 64.5,
       "TCS": 60.0,
       "Infosys": 56.2
     }
@@ -1151,7 +1164,8 @@
       "Amazon": 56.7,
       "Microsoft": 49.5,
       "Meta": 56.1,
-      "TCS": 43.5
+      "TCS": 43.5,
+      "ZS Associates": 88.4
     }
   },
   {
@@ -1307,6 +1321,7 @@
       "Amazon": 58.5,
       "Microsoft": 52.3,
       "Meta": 32.7,
+      "CRED": 100.0,
       "Infosys": 67.9
     }
   },
@@ -1358,6 +1373,7 @@
       "Google": 46.0,
       "Amazon": 45.1,
       "Meta": 32.7,
+      "Razorpay": 86.1,
       "TCS": 43.5
     }
   },
@@ -2299,6 +2315,7 @@
       "Amazon": 54.6,
       "Microsoft": 49.5,
       "Meta": 43.4,
+      "Razorpay": 64.5,
       "Goldman Sachs": 44.8
     }
   },
@@ -2418,7 +2435,8 @@
       "Microsoft": 32.0,
       "Meta": 32.7,
       "TCS": 69.7,
-      "Infosys": 96.5
+      "Infosys": 96.5,
+      "ZS Associates": 100.0
     }
   },
   {
@@ -2637,6 +2655,7 @@
       "Amazon": 48.3,
       "Microsoft": 32.0,
       "Meta": 38.7,
+      "Razorpay": 64.5,
       "TCS": 69.7,
       "Goldman Sachs": 59.0
     }
@@ -4103,7 +4122,8 @@
     "companies": {
       "Google": 28.4,
       "Amazon": 48.3,
-      "Microsoft": 32.0
+      "Microsoft": 32.0,
+      "ZS Associates": 88.4
     }
   },
   {
@@ -9327,7 +9347,8 @@
       "Google": 11.8,
       "Amazon": 20.9,
       "Meta": 24.5,
-      "Deloitte": 81.0
+      "Deloitte": 81.0,
+      "ZS Associates": 88.4
     }
   },
   {
@@ -12504,7 +12525,8 @@
     "link": "https://leetcode.com/problems/count-elements-with-maximum-frequency",
     "companies": {
       "Google": 11.8,
-      "Amazon": 14.3
+      "Amazon": 14.3,
+      "CRED": 89.2
     }
   },
   {
@@ -14544,7 +14566,8 @@
     "difficulty": "Medium",
     "link": "https://leetcode.com/problems/shortest-subarray-to-be-removed-to-make-array-sorted",
     "companies": {
-      "Amazon": 14.3
+      "Amazon": 14.3,
+      "Razorpay": 97.2
     }
   },
   {
@@ -17230,6 +17253,64 @@
   },
   {
     "id": "p1099",
+    "title": "Minimum Total Cost to Make Arrays Unequal",
+    "topics": [
+      "Array",
+      "Hash Table",
+      "Greedy",
+      "Counting"
+    ],
+    "difficulty": "Hard",
+    "link": "https://leetcode.com/problems/minimum-total-cost-to-make-arrays-unequal",
+    "companies": {
+      "Razorpay": 100.0
+    }
+  },
+  {
+    "id": "p1100",
+    "title": "Two Best Non-Overlapping Events",
+    "topics": [
+      "Array",
+      "Binary Search",
+      "Dynamic Programming",
+      "Sorting",
+      "Heap (Priority Queue)"
+    ],
+    "difficulty": "Medium",
+    "link": "https://leetcode.com/problems/two-best-non-overlapping-events",
+    "companies": {
+      "Razorpay": 97.2
+    }
+  },
+  {
+    "id": "p1101",
+    "title": "Most Beautiful Item for Each Query",
+    "topics": [
+      "Array",
+      "Binary Search",
+      "Sorting"
+    ],
+    "difficulty": "Medium",
+    "link": "https://leetcode.com/problems/most-beautiful-item-for-each-query",
+    "companies": {
+      "Razorpay": 97.2
+    }
+  },
+  {
+    "id": "p1102",
+    "title": "Smallest Good Base",
+    "topics": [
+      "Math",
+      "Binary Search"
+    ],
+    "difficulty": "Hard",
+    "link": "https://leetcode.com/problems/smallest-good-base",
+    "companies": {
+      "Razorpay": 64.5
+    }
+  },
+  {
+    "id": "p1103",
     "title": "Maximize Score After N Operations",
     "topics": [
       "Array",
@@ -17247,7 +17328,7 @@
     }
   },
   {
-    "id": "p1100",
+    "id": "p1104",
     "title": "Find the Peaks",
     "topics": [
       "Array",
@@ -17260,7 +17341,7 @@
     }
   },
   {
-    "id": "p1101",
+    "id": "p1105",
     "title": "Minimum Number of Operations to Reinitialize a Permutation",
     "topics": [
       "Array",
@@ -17274,7 +17355,7 @@
     }
   },
   {
-    "id": "p1102",
+    "id": "p1106",
     "title": "Maximum Bags With Full Capacity of Rocks",
     "topics": [
       "Array",
@@ -17288,7 +17369,7 @@
     }
   },
   {
-    "id": "p1103",
+    "id": "p1107",
     "title": "Minimum Operations to Equalize Binary String",
     "topics": [
       "Math",
@@ -17304,7 +17385,7 @@
     }
   },
   {
-    "id": "p1104",
+    "id": "p1108",
     "title": "Minimum Total Cost to Process All Elements",
     "topics": [],
     "difficulty": "Medium",
@@ -17314,7 +17395,7 @@
     }
   },
   {
-    "id": "p1105",
+    "id": "p1109",
     "title": "Number of Flowers in Full Bloom",
     "topics": [
       "Array",
@@ -17331,7 +17412,7 @@
     }
   },
   {
-    "id": "p1106",
+    "id": "p1110",
     "title": "Minimum Number of Swaps to Make the String Balanced",
     "topics": [
       "Two Pointers",
@@ -17347,7 +17428,7 @@
     }
   },
   {
-    "id": "p1107",
+    "id": "p1111",
     "title": "Maximize Sum Of Array After K Negations",
     "topics": [
       "Array",
@@ -17361,7 +17442,7 @@
     }
   },
   {
-    "id": "p1108",
+    "id": "p1112",
     "title": "Minimum Moves to Equal Array Elements",
     "topics": [
       "Array",
@@ -17374,7 +17455,7 @@
     }
   },
   {
-    "id": "p1109",
+    "id": "p1113",
     "title": "Find Total Time Spent by Each Employee",
     "topics": [
       "Database"
@@ -17386,7 +17467,7 @@
     }
   },
   {
-    "id": "p1110",
+    "id": "p1114",
     "title": "Wiggle Sort II",
     "topics": [
       "Array",
@@ -17402,7 +17483,7 @@
     }
   },
   {
-    "id": "p1111",
+    "id": "p1115",
     "title": "High Five",
     "topics": [
       "Array",
@@ -17417,7 +17498,7 @@
     }
   },
   {
-    "id": "p1112",
+    "id": "p1116",
     "title": "Fraction to Recurring Decimal",
     "topics": [
       "Hash Table",
@@ -17431,7 +17512,7 @@
     }
   },
   {
-    "id": "p1113",
+    "id": "p1117",
     "title": "Valid Arrangement of Pairs",
     "topics": [
       "Array",
@@ -17448,7 +17529,7 @@
     }
   },
   {
-    "id": "p1114",
+    "id": "p1118",
     "title": "Find the Winner of an Array Game",
     "topics": [
       "Array",
@@ -17461,7 +17542,7 @@
     }
   },
   {
-    "id": "p1115",
+    "id": "p1119",
     "title": "Maximize Distance to Closest Person",
     "topics": [
       "Array"
@@ -17473,7 +17554,7 @@
     }
   },
   {
-    "id": "p1116",
+    "id": "p1120",
     "title": "Flatten a Multilevel Doubly Linked List",
     "topics": [
       "Linked List",
@@ -17487,7 +17568,7 @@
     }
   },
   {
-    "id": "p1117",
+    "id": "p1121",
     "title": "Merge In Between Linked Lists",
     "topics": [
       "Linked List"
@@ -17499,7 +17580,7 @@
     }
   },
   {
-    "id": "p1118",
+    "id": "p1122",
     "title": "Minimum Changes To Make Alternating Binary String",
     "topics": [
       "String"
@@ -17511,7 +17592,7 @@
     }
   },
   {
-    "id": "p1119",
+    "id": "p1123",
     "title": "Length of the Longest Alphabetical Continuous Substring",
     "topics": [
       "String"
@@ -17520,6 +17601,31 @@
     "link": "https://leetcode.com/problems/length-of-the-longest-alphabetical-continuous-substring",
     "companies": {
       "IBM": 60.1
+    }
+  },
+  {
+    "id": "p1124",
+    "title": "Find the Sum of Encrypted Integers",
+    "topics": [
+      "Array",
+      "Math"
+    ],
+    "difficulty": "Easy",
+    "link": "https://leetcode.com/problems/find-the-sum-of-encrypted-integers",
+    "companies": {
+      "Larsen & Toubro": 100.0
+    }
+  },
+  {
+    "id": "p1125",
+    "title": "Longest Strictly Increasing or Strictly Decreasing Subarray",
+    "topics": [
+      "Array"
+    ],
+    "difficulty": "Easy",
+    "link": "https://leetcode.com/problems/longest-strictly-increasing-or-strictly-decreasing-subarray",
+    "companies": {
+      "Larsen & Toubro": 100.0
     }
   }
 ]

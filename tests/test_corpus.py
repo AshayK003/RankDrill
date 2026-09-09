@@ -1,6 +1,6 @@
 """Tests for data.build_corpus merge logic (TDD red phase)."""
 
-from data.build_corpus import merge_company_rows
+from data.build_corpus import WINDOW_STATS, fetch_company_best, merge_company_rows
 
 
 def _row(company, title, freq, topics="Array", difficulty="MEDIUM", link="u"):
@@ -34,3 +34,30 @@ def test_distinct_titles_stay_distinct():
 def test_empty_input():
     problems, stats = merge_company_rows([])
     assert problems == [] and stats["total_rows"] == 0
+
+
+def test_fallback_picks_first_window_with_rows():
+    calls = []
+
+    def stub(company, window):
+        calls.append(window)
+        if window == "3. Six Months.csv":
+            return []
+        return [{"Title": "X", "company": company}]
+
+    rows = fetch_company_best("Acme", _fetch=stub)
+    assert len(rows) == 1
+    assert WINDOW_STATS["Acme"] == "2. Three Months.csv"
+    assert calls[0] == "3. Six Months.csv"
+
+
+def test_fallback_records_none_when_all_empty():
+    rows = fetch_company_best("Ghost", _fetch=lambda c, w: [])
+    assert rows == [] and WINDOW_STATS["Ghost"] is None
+
+
+def test_fetcher_errors_are_skipped():
+    def boom(company, window):
+        raise IOError("down")
+
+    assert fetch_company_best("Down", _fetch=boom) == []

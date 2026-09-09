@@ -29,23 +29,45 @@ TARGET_COMPANIES = [
 ]
 # Note: dir names are case-sensitive upstream ("razorpay" is lowercase there).
 # Udaan has no upstream dir — it stays in companies.json (salary display) only.
-WINDOW = "3. Six Months.csv"
+WINDOWS = [
+    "3. Six Months.csv",
+    "2. Three Months.csv",
+    "1. Thirty Days.csv",
+    "5. All.csv",  # last resort only; recorded in stats, disclosed in report
+]
+WINDOW_STATS = {}
 
 
 def normalize(title):
     return re.sub(r"[^a-z0-9]+", " ", (title or "").lower()).strip()
 
 
-def fetch_company_csv(company):
-    """Download one company's six-month CSV. Returns row dicts with company set."""
-    url = f"{BASE}/{urllib.parse.quote(company)}/{urllib.parse.quote(WINDOW)}"
+def fetch_company_csv(company, window=WINDOWS[0]):
+    """Download one company's CSV for a given window. Returns row dicts."""
+    url = f"{BASE}/{urllib.parse.quote(company)}/{urllib.parse.quote(window)}"
     with urllib.request.urlopen(url, timeout=60) as resp:
         text = resp.read().decode("utf-8")
     rows = []
     for row in csv.DictReader(io.StringIO(text)):
+        if not (row.get("Title") or "").strip():
+            continue
         row["company"] = company
         rows.append(row)
     return rows
+
+
+def fetch_company_best(company, _fetch=fetch_company_csv):
+    """First window with data rows wins. Records the choice in WINDOW_STATS."""
+    for window in WINDOWS:
+        try:
+            rows = _fetch(company, window)
+        except Exception:
+            continue
+        if rows:
+            WINDOW_STATS[company] = window
+            return rows
+    WINDOW_STATS[company] = None
+    return []
 
 
 def merge_company_rows(rows):
@@ -103,10 +125,10 @@ def main(companies=None, csv_dir=None):
                     rows.append(row)
     else:
         for company in companies:
-            try:
-                rows.extend(fetch_company_csv(company))
-            except Exception as exc:
-                print(f"WARN: {company} skipped ({exc})")
+            got = fetch_company_best(company)
+            if not got:
+                print(f"WARN: {company} skipped (no data in any window)")
+            rows.extend(got)
     problems, stats = merge_company_rows(rows)
     with open(SEEDS / "companies_seed.json", encoding="utf-8") as f:
         salary = json.load(f)
@@ -125,6 +147,9 @@ def main(companies=None, csv_dir=None):
     with open(HERE / "companies.json", "w", encoding="utf-8") as f:
         json.dump(salary, f, indent=2)
     print(f"Wrote {len(problems)} problems, {len(salary)} companies: {stats}")
+    fallbacks = {c: w for c, w in WINDOW_STATS.items() if w != WINDOWS[0]}
+    if fallbacks:
+        print(f"Window fallbacks (disclosed): {fallbacks}")
 
 
 if __name__ == "__main__":
