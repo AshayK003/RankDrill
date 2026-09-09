@@ -115,7 +115,11 @@ def main(companies=None, csv_dir=None):
         stats = {"total_rows": 0, "matched_titles": len(problems), "fallback": True}
     with open(HERE / "problems.json", "w", encoding="utf-8") as f:
         json.dump(problems, f, indent=2)
-    print(f"Wrote {len(problems)} problems from {stats['total_rows']} rows: {stats}")
+    with open(SEEDS / "companies_seed.json", encoding="utf-8") as f:
+        salary = json.load(f)
+    with open(HERE / "companies.json", "w", encoding="utf-8") as f:
+        json.dump(salary, f, indent=2)
+    print(f"Wrote {len(problems)} problems, {len(salary)} companies: {stats}")
 
 
 if __name__ == "__main__":

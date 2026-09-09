@@ -1,0 +1,98 @@
+[
+  {
+    "band_label": "SDE-1 total \u20b918.3\u201328.1L/yr",
+    "max_lpa": 28.1,
+    "min_lpa": 18.3,
+    "name": "Flipkart",
+    "source": "levels.fyi, Jul 2026",
+    "updated": "2026-09-09"
+  },
+  {
+    "band_label": "L1 total ~\u20b930L/yr",
+    "max_lpa": 30.0,
+    "min_lpa": 30.0,
+    "name": "Udaan",
+    "source": "levels.fyi, Aug 2026",
+    "updated": "2026-09-09"
+  },
+  {
+    "band_label": "L3 total \u20b935.3\u201350.6L/yr",
+    "max_lpa": 50.6,
+    "min_lpa": 35.3,
+    "name": "Google",
+    "source": "https://www.levels.fyi/companies/google/salaries/software-engineer/levels/l3/locations/india",
+    "updated": "2026-09-09"
+  },
+  {
+    "band_label": "SDE I total \u20b922.7\u201331.1L/yr",
+    "max_lpa": 31.1,
+    "min_lpa": 22.7,
+    "name": "Amazon",
+    "source": "https://www.levels.fyi/companies/amazon/salaries/software-engineer/levels/sde-i/locations/india",
+    "updated": "2026-09-09"
+  },
+  {
+    "band_label": "SDE total \u20b918.0\u201328.9L/yr",
+    "max_lpa": 28.9,
+    "min_lpa": 18.0,
+    "name": "Microsoft",
+    "source": "https://www.levels.fyi/companies/microsoft/salaries/software-engineer/levels/sde/locations/india",
+    "updated": "2026-09-09"
+  },
+  {
+    "band_label": "E3 total \u20b954.5\u201365.8L/yr",
+    "max_lpa": 65.8,
+    "min_lpa": 54.5,
+    "name": "Meta",
+    "source": "https://www.levels.fyi/companies/meta/salaries/software-engineer/levels/e3/locations/india",
+    "updated": "2026-09-09"
+  },
+  {
+    "band_label": "L6 total \u20b917.4\u201326.7L/yr",
+    "max_lpa": 26.7,
+    "min_lpa": 17.4,
+    "name": "Swiggy",
+    "source": "https://www.levels.fyi/companies/swiggy/salaries/software-engineer/levels/l6/locations/india",
+    "updated": "2026-09-09"
+  },
+  {
+    "band_label": "entry band unverified",
+    "max_lpa": null,
+    "min_lpa": null,
+    "name": "Zomato",
+    "source": "unverified",
+    "updated": "2026-09-09"
+  },
+  {
+    "band_label": "SWE-1 total \u20b919.5\u201337.8L/yr",
+    "max_lpa": 37.8,
+    "min_lpa": 19.5,
+    "name": "PhonePe",
+    "source": "https://www.levels.fyi/companies/phonepe/salaries/software-engineer/levels/software-engineer-1/locations/india",
+    "updated": "2026-09-09"
+  },
+  {
+    "band_label": "SWE total \u20b913.6\u201331.8L/yr",
+    "max_lpa": 31.8,
+    "min_lpa": 13.6,
+    "name": "Razorpay",
+    "source": "https://www.levels.fyi/companies/razorpay/salaries/software-engineer/levels/software-engineer/locations/india",
+    "updated": "2026-09-09"
+  },
+  {
+    "band_label": "L3 total \u20b919.5\u201345.6L/yr",
+    "max_lpa": 45.6,
+    "min_lpa": 19.5,
+    "name": "CRED",
+    "source": "https://www.levels.fyi/companies/cred/salaries/software-engineer/levels/l3/locations/india",
+    "updated": "2026-09-09"
+  },
+  {
+    "band_label": "SWE-I total \u20b916.1\u201328.6L/yr",
+    "max_lpa": 28.6,
+    "min_lpa": 16.1,
+    "name": "Groww",
+    "source": "https://www.levels.fyi/companies/groww/salaries/software-engineer/levels/software-engineer-i/locations/india",
+    "updated": "2026-09-09"
+  }
+]

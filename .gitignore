@@ -10,9 +10,7 @@ __pycache__/
 # Streamlit
 .streamlit/secrets.toml
 
-# Data and results (built artifacts; seed files are tracked)
-data/problems.json
-data/companies.json
+# Results (rebuilt artifacts; prebuilt data below is tracked for deploys)
 results/
 !results/.gitkeep
 
