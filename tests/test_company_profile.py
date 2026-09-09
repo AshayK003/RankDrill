@@ -41,3 +41,10 @@ def test_salary_band_attached():
 
 def test_unknown_company_returns_none():
     assert company_profile(PROBLEMS, COMPANIES, "NoSuchCo") is None
+
+
+def test_case_mismatch_between_corpus_and_registry():
+    docs = [{**PROBLEMS[0], "companies": {"tcs": 50.0}}]
+    corps = [{"name": "TCS", "band_label": "B"}]
+    prof = company_profile(docs, corps, "TCS")
+    assert prof is not None and prof["problem_count"] == 1

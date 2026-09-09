@@ -14,7 +14,7 @@
       "Microsoft": 100.0,
       "Meta": 100.0,
       "Flipkart": 57.1,
-      "tcs": 100.0,
+      "TCS": 100.0,
       "Infosys": 100.0,
       "Cognizant": 76.3,
       "Deloitte": 100.0,
@@ -41,7 +41,7 @@
       "Amazon": 79.0,
       "Microsoft": 77.1,
       "Meta": 74.5,
-      "tcs": 43.5
+      "TCS": 43.5
     }
   },
   {
@@ -57,7 +57,7 @@
       "Amazon": 70.6,
       "Microsoft": 56.9,
       "Meta": 68.5,
-      "tcs": 79.5,
+      "TCS": 79.5,
       "Cognizant": 76.3,
       "Accenture": 75.0,
       "IBM": 60.1
@@ -78,7 +78,7 @@
       "Amazon": 74.9,
       "Microsoft": 72.6,
       "Meta": 71.1,
-      "tcs": 69.7,
+      "TCS": 69.7,
       "Infosys": 56.2,
       "Accenture": 75.0,
       "Goldman Sachs": 53.1,
@@ -102,7 +102,7 @@
       "Amazon": 85.7,
       "Microsoft": 74.5,
       "Meta": 56.1,
-      "tcs": 53.1,
+      "TCS": 53.1,
       "Infosys": 67.9,
       "Goldman Sachs": 100.0
     }
@@ -122,7 +122,7 @@
       "Amazon": 74.5,
       "Microsoft": 56.9,
       "Meta": 75.5,
-      "tcs": 53.1,
+      "TCS": 53.1,
       "Goldman Sachs": 70.6
     }
   },
@@ -141,7 +141,7 @@
       "Amazon": 81.6,
       "Microsoft": 76.3,
       "Meta": 75.5,
-      "tcs": 69.7,
+      "TCS": 69.7,
       "Infosys": 96.5,
       "Wipro": 100.0,
       "Cognizant": 100.0,
@@ -164,7 +164,7 @@
       "Amazon": 81.9,
       "Microsoft": 66.8,
       "Meta": 83.6,
-      "tcs": 69.7,
+      "TCS": 69.7,
       "Infosys": 92.6,
       "Accenture": 75.0,
       "Goldman Sachs": 53.1,
@@ -204,7 +204,7 @@
       "Amazon": 63.9,
       "Microsoft": 62.5,
       "Meta": 53.5,
-      "tcs": 73.5,
+      "TCS": 73.5,
       "Infosys": 67.9,
       "IBM": 60.1,
       "Capgemini": 82.5
@@ -225,7 +225,7 @@
       "Amazon": 67.6,
       "Microsoft": 56.9,
       "Meta": 58.4,
-      "tcs": 65.3,
+      "TCS": 65.3,
       "Paytm": 100.0
     }
   },
@@ -246,7 +246,7 @@
       "Microsoft": 79.4,
       "Meta": 67.1,
       "Flipkart": 57.1,
-      "tcs": 84.4,
+      "TCS": 84.4,
       "Infosys": 67.9,
       "Goldman Sachs": 44.8
     }
@@ -264,7 +264,7 @@
       "Amazon": 56.7,
       "Microsoft": 54.7,
       "Meta": 60.4,
-      "tcs": 60.0,
+      "TCS": 60.0,
       "Infosys": 56.2
     }
   },
@@ -283,7 +283,7 @@
       "Amazon": 69.2,
       "Microsoft": 65.5,
       "Meta": 64.0,
-      "tcs": 93.4,
+      "TCS": 93.4,
       "Infosys": 82.8,
       "Goldman Sachs": 59.0,
       "IBM": 60.1
@@ -323,7 +323,7 @@
       "Amazon": 61.8,
       "Microsoft": 60.8,
       "Meta": 75.5,
-      "tcs": 69.7,
+      "TCS": 69.7,
       "Infosys": 67.9
     }
   },
@@ -342,7 +342,7 @@
       "Amazon": 61.0,
       "Microsoft": 60.8,
       "Meta": 74.5,
-      "tcs": 60.0,
+      "TCS": 60.0,
       "IBM": 91.1
     }
   },
@@ -359,7 +359,7 @@
       "Amazon": 51.1,
       "Microsoft": 42.5,
       "Meta": 47.3,
-      "tcs": 43.5
+      "TCS": 43.5
     }
   },
   {
@@ -377,7 +377,7 @@
       "Amazon": 56.7,
       "Microsoft": 54.7,
       "Meta": 67.1,
-      "tcs": 69.7
+      "TCS": 69.7
     }
   },
   {
@@ -415,7 +415,7 @@
       "Amazon": 63.2,
       "Microsoft": 72.6,
       "Meta": 64.0,
-      "tcs": 79.5,
+      "TCS": 79.5,
       "Infosys": 96.5
     }
   },
@@ -434,7 +434,7 @@
       "Amazon": 46.8,
       "Microsoft": 54.7,
       "Meta": 56.1,
-      "tcs": 82.1,
+      "TCS": 82.1,
       "IBM": 60.1
     }
   },
@@ -455,7 +455,7 @@
       "Amazon": 76.0,
       "Microsoft": 70.5,
       "Meta": 62.3,
-      "tcs": 43.5,
+      "TCS": 43.5,
       "Infosys": 82.8,
       "Goldman Sachs": 59.0,
       "Oracle": 78.7
@@ -476,7 +476,7 @@
       "Amazon": 52.3,
       "Microsoft": 62.5,
       "Meta": 60.4,
-      "tcs": 76.7,
+      "TCS": 76.7,
       "Infosys": 67.9,
       "Deloitte": 81.0,
       "IBM": 60.1
@@ -534,7 +534,7 @@
       "Amazon": 48.3,
       "Microsoft": 49.5,
       "Meta": 32.7,
-      "tcs": 53.1,
+      "TCS": 53.1,
       "Infosys": 56.2
     }
   },
@@ -558,7 +558,7 @@
       "Amazon": 64.5,
       "Microsoft": 46.2,
       "Meta": 50.6,
-      "tcs": 43.5
+      "TCS": 43.5
     }
   },
   {
@@ -633,7 +633,7 @@
       "Amazon": 74.9,
       "Microsoft": 46.2,
       "Meta": 60.4,
-      "tcs": 69.7,
+      "TCS": 69.7,
       "Infosys": 67.9,
       "Wipro": 100.0,
       "Deloitte": 92.1,
@@ -696,7 +696,7 @@
       "Amazon": 51.1,
       "Microsoft": 46.2,
       "Meta": 43.4,
-      "tcs": 69.7,
+      "TCS": 69.7,
       "Infosys": 56.2
     }
   },
@@ -796,7 +796,7 @@
       "Amazon": 63.2,
       "Microsoft": 54.7,
       "Meta": 47.3,
-      "tcs": 53.1,
+      "TCS": 53.1,
       "Infosys": 82.8
     }
   },
@@ -815,7 +815,7 @@
       "Amazon": 45.1,
       "Microsoft": 52.3,
       "Meta": 58.4,
-      "tcs": 60.0,
+      "TCS": 60.0,
       "Infosys": 56.2
     }
   },
@@ -852,7 +852,7 @@
       "Amazon": 61.0,
       "Microsoft": 56.9,
       "Meta": 43.4,
-      "tcs": 53.1,
+      "TCS": 53.1,
       "Infosys": 82.8,
       "Deloitte": 81.0
     }
@@ -871,7 +871,7 @@
       "Amazon": 53.5,
       "Microsoft": 52.3,
       "Meta": 65.6,
-      "tcs": 73.5,
+      "TCS": 73.5,
       "Infosys": 82.8,
       "Cognizant": 86.8,
       "Accenture": 75.0
@@ -931,7 +931,7 @@
       "Amazon": 64.5,
       "Microsoft": 56.9,
       "Meta": 47.3,
-      "tcs": 43.5,
+      "TCS": 43.5,
       "Infosys": 56.2
     }
   },
@@ -1018,7 +1018,7 @@
       "Amazon": 51.1,
       "Microsoft": 42.5,
       "Meta": 56.1,
-      "tcs": 60.0,
+      "TCS": 60.0,
       "Oracle": 78.7
     }
   },
@@ -1053,7 +1053,7 @@
       "Amazon": 53.5,
       "Microsoft": 46.2,
       "Meta": 56.1,
-      "tcs": 43.5,
+      "TCS": 43.5,
       "Infosys": 56.2
     }
   },
@@ -1071,7 +1071,7 @@
       "Amazon": 41.2,
       "Microsoft": 37.9,
       "Meta": 64.0,
-      "tcs": 43.5
+      "TCS": 43.5
     }
   },
   {
@@ -1151,7 +1151,7 @@
       "Amazon": 56.7,
       "Microsoft": 49.5,
       "Meta": 56.1,
-      "tcs": 43.5
+      "TCS": 43.5
     }
   },
   {
@@ -1241,7 +1241,7 @@
       "Amazon": 46.8,
       "Microsoft": 46.2,
       "Meta": 24.5,
-      "tcs": 69.7
+      "TCS": 69.7
     }
   },
   {
@@ -1274,7 +1274,7 @@
       "Amazon": 48.3,
       "Microsoft": 37.9,
       "Meta": 62.3,
-      "tcs": 53.1,
+      "TCS": 53.1,
       "Infosys": 56.2
     }
   },
@@ -1326,7 +1326,7 @@
       "Amazon": 51.1,
       "Microsoft": 46.2,
       "Meta": 43.4,
-      "tcs": 43.5
+      "TCS": 43.5
     }
   },
   {
@@ -1358,7 +1358,7 @@
       "Google": 46.0,
       "Amazon": 45.1,
       "Meta": 32.7,
-      "tcs": 43.5
+      "TCS": 43.5
     }
   },
   {
@@ -1375,7 +1375,7 @@
       "Amazon": 51.1,
       "Microsoft": 24.1,
       "Meta": 38.7,
-      "tcs": 88.4
+      "TCS": 88.4
     }
   },
   {
@@ -1411,7 +1411,7 @@
       "Amazon": 56.7,
       "Microsoft": 46.2,
       "Meta": 47.3,
-      "tcs": 73.5,
+      "TCS": 73.5,
       "Accenture": 75.0
     }
   },
@@ -1429,7 +1429,7 @@
       "Amazon": 55.7,
       "Microsoft": 54.7,
       "Meta": 73.4,
-      "tcs": 53.1,
+      "TCS": 53.1,
       "Infosys": 56.2,
       "Cognizant": 76.3,
       "Deloitte": 81.0
@@ -1526,7 +1526,7 @@
       "Amazon": 60.2,
       "Microsoft": 49.5,
       "Meta": 43.4,
-      "tcs": 69.7,
+      "TCS": 69.7,
       "Infosys": 56.2
     }
   },
@@ -1546,7 +1546,7 @@
       "Amazon": 48.3,
       "Microsoft": 37.9,
       "Meta": 43.4,
-      "tcs": 43.5
+      "TCS": 43.5
     }
   },
   {
@@ -1562,7 +1562,7 @@
       "Google": 45.0,
       "Amazon": 48.3,
       "Meta": 43.4,
-      "tcs": 73.5,
+      "TCS": 73.5,
       "Infosys": 67.9
     }
   },
@@ -1643,7 +1643,7 @@
       "Amazon": 51.1,
       "Microsoft": 42.5,
       "Meta": 43.4,
-      "tcs": 43.5,
+      "TCS": 43.5,
       "Goldman Sachs": 44.8
     }
   },
@@ -1661,7 +1661,7 @@
       "Amazon": 45.1,
       "Microsoft": 32.0,
       "Meta": 32.7,
-      "tcs": 43.5
+      "TCS": 43.5
     }
   },
   {
@@ -1678,7 +1678,7 @@
       "Amazon": 45.1,
       "Microsoft": 46.2,
       "Meta": 38.7,
-      "tcs": 43.5,
+      "TCS": 43.5,
       "Goldman Sachs": 44.8
     }
   },
@@ -1712,7 +1712,7 @@
       "Amazon": 58.5,
       "Microsoft": 32.0,
       "Meta": 58.4,
-      "tcs": 53.1,
+      "TCS": 53.1,
       "Infosys": 56.2
     }
   },
@@ -1770,7 +1770,7 @@
       "Amazon": 36.4,
       "Microsoft": 37.9,
       "Meta": 24.5,
-      "tcs": 60.0
+      "TCS": 60.0
     }
   },
   {
@@ -1802,7 +1802,7 @@
       "Amazon": 49.7,
       "Microsoft": 49.5,
       "Meta": 47.3,
-      "tcs": 43.5
+      "TCS": 43.5
     }
   },
   {
@@ -1823,7 +1823,7 @@
       "Google": 43.9,
       "Amazon": 39.0,
       "Microsoft": 42.5,
-      "tcs": 53.1
+      "TCS": 53.1
     }
   },
   {
@@ -1892,7 +1892,7 @@
       "Amazon": 57.6,
       "Microsoft": 46.2,
       "Meta": 53.5,
-      "tcs": 43.5,
+      "TCS": 43.5,
       "Cognizant": 76.3
     }
   },
@@ -1945,7 +1945,7 @@
       "Amazon": 51.1,
       "Microsoft": 42.5,
       "Meta": 50.6,
-      "tcs": 53.1
+      "TCS": 53.1
     }
   },
   {
@@ -1995,7 +1995,7 @@
       "Amazon": 45.1,
       "Microsoft": 56.9,
       "Meta": 32.7,
-      "tcs": 53.1
+      "TCS": 53.1
     }
   },
   {
@@ -2014,7 +2014,7 @@
       "Amazon": 39.0,
       "Microsoft": 56.9,
       "Meta": 53.5,
-      "tcs": 82.1
+      "TCS": 82.1
     }
   },
   {
@@ -2072,7 +2072,7 @@
       "Amazon": 41.2,
       "Microsoft": 52.3,
       "Meta": 24.5,
-      "tcs": 53.1
+      "TCS": 53.1
     }
   },
   {
@@ -2123,7 +2123,7 @@
       "Amazon": 33.5,
       "Microsoft": 42.5,
       "Meta": 32.7,
-      "tcs": 43.5
+      "TCS": 43.5
     }
   },
   {
@@ -2175,7 +2175,7 @@
       "Google": 41.4,
       "Amazon": 49.7,
       "Meta": 43.4,
-      "tcs": 60.0
+      "TCS": 60.0
     }
   },
   {
@@ -2210,7 +2210,7 @@
       "Amazon": 39.0,
       "Microsoft": 37.9,
       "Meta": 24.5,
-      "tcs": 43.5
+      "TCS": 43.5
     }
   },
   {
@@ -2229,7 +2229,7 @@
       "Amazon": 53.5,
       "Microsoft": 37.9,
       "Meta": 43.4,
-      "tcs": 53.1
+      "TCS": 53.1
     }
   },
   {
@@ -2247,7 +2247,7 @@
       "Amazon": 39.0,
       "Microsoft": 46.2,
       "Meta": 38.7,
-      "tcs": 86.5,
+      "TCS": 86.5,
       "Infosys": 56.2,
       "IBM": 77.2
     }
@@ -2317,7 +2317,7 @@
       "Amazon": 43.2,
       "Microsoft": 52.3,
       "Meta": 32.7,
-      "tcs": 43.5,
+      "TCS": 43.5,
       "Goldman Sachs": 44.8,
       "SAP": 100.0
     }
@@ -2385,7 +2385,7 @@
       "Amazon": 45.1,
       "Microsoft": 32.0,
       "Meta": 24.5,
-      "tcs": 43.5
+      "TCS": 43.5
     }
   },
   {
@@ -2417,7 +2417,7 @@
       "Amazon": 45.1,
       "Microsoft": 32.0,
       "Meta": 32.7,
-      "tcs": 69.7,
+      "TCS": 69.7,
       "Infosys": 96.5
     }
   },
@@ -2436,7 +2436,7 @@
       "Amazon": 46.8,
       "Microsoft": 46.2,
       "Meta": 62.3,
-      "tcs": 43.5
+      "TCS": 43.5
     }
   },
   {
@@ -2552,7 +2552,7 @@
       "Amazon": 30.1,
       "Microsoft": 37.9,
       "Meta": 32.7,
-      "tcs": 43.5
+      "TCS": 43.5
     }
   },
   {
@@ -2618,7 +2618,7 @@
       "Amazon": 41.2,
       "Microsoft": 42.5,
       "Meta": 38.7,
-      "tcs": 43.5
+      "TCS": 43.5
     }
   },
   {
@@ -2637,7 +2637,7 @@
       "Amazon": 48.3,
       "Microsoft": 32.0,
       "Meta": 38.7,
-      "tcs": 69.7,
+      "TCS": 69.7,
       "Goldman Sachs": 59.0
     }
   },
@@ -2906,7 +2906,7 @@
       "Google": 37.0,
       "Amazon": 39.0,
       "Microsoft": 37.9,
-      "tcs": 65.3
+      "TCS": 65.3
     }
   },
   {
@@ -3013,7 +3013,7 @@
       "Amazon": 48.3,
       "Microsoft": 46.2,
       "Meta": 64.0,
-      "tcs": 43.5
+      "TCS": 43.5
     }
   },
   {
@@ -3213,7 +3213,7 @@
     "companies": {
       "Google": 35.2,
       "Meta": 24.5,
-      "tcs": 53.1
+      "TCS": 53.1
     }
   },
   {
@@ -3355,7 +3355,7 @@
       "Google": 33.2,
       "Amazon": 54.6,
       "Microsoft": 42.5,
-      "tcs": 43.5
+      "TCS": 43.5
     }
   },
   {
@@ -3642,7 +3642,7 @@
     "companies": {
       "Google": 33.2,
       "Meta": 24.5,
-      "tcs": 43.5
+      "TCS": 43.5
     }
   },
   {
@@ -3727,7 +3727,7 @@
       "Amazon": 26.0,
       "Microsoft": 24.1,
       "Meta": 32.7,
-      "tcs": 43.5
+      "TCS": 43.5
     }
   },
   {
@@ -3821,7 +3821,7 @@
     "companies": {
       "Google": 31.0,
       "Amazon": 39.0,
-      "tcs": 53.1,
+      "TCS": 53.1,
       "Infosys": 67.9
     }
   },
@@ -4133,7 +4133,7 @@
       "Google": 28.4,
       "Amazon": 45.1,
       "Meta": 32.7,
-      "tcs": 43.5
+      "TCS": 43.5
     }
   },
   {
@@ -4449,7 +4449,7 @@
       "Google": 28.4,
       "Microsoft": 24.1,
       "Meta": 24.5,
-      "tcs": 43.5
+      "TCS": 43.5
     }
   },
   {
@@ -4873,7 +4873,7 @@
       "Amazon": 20.9,
       "Microsoft": 32.0,
       "Meta": 24.5,
-      "tcs": 60.0
+      "TCS": 60.0
     }
   },
   {
@@ -5511,7 +5511,7 @@
     "companies": {
       "Google": 25.4,
       "Amazon": 45.1,
-      "tcs": 43.5
+      "TCS": 43.5
     }
   },
   {
@@ -5617,7 +5617,7 @@
       "Google": 25.4,
       "Amazon": 26.0,
       "Meta": 24.5,
-      "tcs": 96.3
+      "TCS": 96.3
     }
   },
   {
@@ -5794,7 +5794,7 @@
       "Amazon": 41.2,
       "Microsoft": 32.0,
       "Meta": 43.4,
-      "tcs": 43.5
+      "TCS": 43.5
     }
   },
   {
@@ -6514,7 +6514,7 @@
       "Amazon": 14.3,
       "Microsoft": 24.1,
       "Meta": 24.5,
-      "tcs": 43.5,
+      "TCS": 43.5,
       "Infosys": 88.1
     }
   },
@@ -8599,7 +8599,7 @@
     "companies": {
       "Google": 17.4,
       "Amazon": 14.3,
-      "tcs": 53.1
+      "TCS": 53.1
     }
   },
   {
@@ -9584,7 +9584,7 @@
     "link": "https://leetcode.com/problems/count-odd-numbers-in-an-interval-range",
     "companies": {
       "Google": 11.8,
-      "tcs": 43.5
+      "TCS": 43.5
     }
   },
   {
@@ -9956,7 +9956,7 @@
       "Google": 11.8,
       "Amazon": 30.1,
       "Meta": 43.4,
-      "tcs": 43.5
+      "TCS": 43.5
     }
   },
   {
@@ -10711,7 +10711,7 @@
       "Google": 11.8,
       "Amazon": 14.3,
       "Meta": 24.5,
-      "tcs": 53.1
+      "TCS": 53.1
     }
   },
   {
@@ -10891,7 +10891,7 @@
       "Amazon": 30.1,
       "Microsoft": 32.0,
       "Meta": 32.7,
-      "tcs": 43.5,
+      "TCS": 43.5,
       "Accenture": 86.1
     }
   },
@@ -10938,7 +10938,7 @@
     "companies": {
       "Google": 11.8,
       "Amazon": 39.0,
-      "tcs": 43.5
+      "TCS": 43.5
     }
   },
   {
@@ -11819,7 +11819,7 @@
       "Amazon": 39.0,
       "Microsoft": 46.2,
       "Meta": 43.4,
-      "tcs": 43.5
+      "TCS": 43.5
     }
   },
   {
@@ -12833,7 +12833,7 @@
     "link": "https://leetcode.com/problems/top-k-frequent-words",
     "companies": {
       "Amazon": 33.5,
-      "tcs": 43.5
+      "TCS": 43.5
     }
   },
   {
@@ -16180,7 +16180,7 @@
     "link": "https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists",
     "companies": {
       "Microsoft": 24.1,
-      "tcs": 43.5
+      "TCS": 43.5
     }
   },
   {
@@ -17037,7 +17037,7 @@
     "link": "https://leetcode.com/problems/toeplitz-matrix",
     "companies": {
       "Meta": 24.5,
-      "tcs": 65.3
+      "TCS": 65.3
     }
   },
   {
@@ -17256,7 +17256,7 @@
     "difficulty": "Easy",
     "link": "https://leetcode.com/problems/find-the-peaks",
     "companies": {
-      "tcs": 53.1
+      "TCS": 53.1
     }
   },
   {
@@ -17270,7 +17270,7 @@
     "difficulty": "Medium",
     "link": "https://leetcode.com/problems/minimum-number-of-operations-to-reinitialize-a-permutation",
     "companies": {
-      "tcs": 43.5
+      "TCS": 43.5
     }
   },
   {

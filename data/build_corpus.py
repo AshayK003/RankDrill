@@ -108,6 +108,11 @@ def main(companies=None, csv_dir=None):
             except Exception as exc:
                 print(f"WARN: {company} skipped ({exc})")
     problems, stats = merge_company_rows(rows)
+    with open(SEEDS / "companies_seed.json", encoding="utf-8") as f:
+        salary = json.load(f)
+    proper = {c["name"].lower(): c["name"] for c in salary}
+    for p in problems:
+        p["companies"] = {proper.get(k.lower(), k): v for k, v in p["companies"].items()}
     if not problems:
         print("No CSV rows — falling back to seed problems.")
         seed = load_seed_problems()

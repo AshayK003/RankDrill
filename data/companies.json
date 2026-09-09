@@ -94,5 +94,93 @@
     "name": "Groww",
     "source": "https://www.levels.fyi/companies/groww/salaries/software-engineer/levels/software-engineer-i/locations/india",
     "updated": "2026-09-09"
+  },
+  {
+    "band_label": "C1Y entry \u20b93.06\u20135.48L/yr",
+    "max_lpa": 5.48,
+    "min_lpa": 3.06,
+    "name": "TCS",
+    "source": "https://www.levels.fyi/companies/tata-consultancy-services/salaries/software-engineer/levels/c1y",
+    "updated": "2026-09-09"
+  },
+  {
+    "band_label": "JL3B Systems Engineer entry \u20b92.95\u20136.94L/yr",
+    "max_lpa": 6.94,
+    "min_lpa": 2.95,
+    "name": "Infosys",
+    "source": "https://www.levels.fyi/companies/infosys/salaries/software-engineer/levels/jl3b/locations/india",
+    "updated": "2026-09-09"
+  },
+  {
+    "band_label": "SWE entry \u20b93.64\u201314.9L/yr",
+    "max_lpa": 14.9,
+    "min_lpa": 3.64,
+    "name": "Wipro",
+    "source": "https://www.levels.fyi/companies/wipro/salaries/software-engineer/levels/software-engineer/locations/india",
+    "updated": "2026-09-09"
+  },
+  {
+    "band_label": "ASE entry \u20b92.94\u201311.7L/yr",
+    "max_lpa": 11.7,
+    "min_lpa": 2.94,
+    "name": "Accenture",
+    "source": "https://www.levels.fyi/companies/accenture/salaries/software-engineer/levels/associate-software-engineer",
+    "updated": "2026-09-09"
+  },
+  {
+    "band_label": "L1 Programmer Analyst entry \u20b93.8\u20136.23L/yr",
+    "max_lpa": 6.23,
+    "min_lpa": 3.8,
+    "name": "Cognizant",
+    "source": "https://www.levels.fyi/companies/cognizant/salaries/software-engineer/levels/l1",
+    "updated": "2026-09-09"
+  },
+  {
+    "band_label": "L1 entry \u20b92.4\u20136.24L/yr",
+    "max_lpa": 6.24,
+    "min_lpa": 2.4,
+    "name": "HCL",
+    "source": "https://www.levels.fyi/companies/hcl-technologies/salaries/software-engineer/levels/l1",
+    "updated": "2026-09-09"
+  },
+  {
+    "band_label": "U1 ASE entry \u20b93.38\u20136.08L/yr",
+    "max_lpa": 6.08,
+    "min_lpa": 3.38,
+    "name": "Tech Mahindra",
+    "source": "https://www.levels.fyi/companies/tech-mahindra/salaries/software-engineer/levels/u1/locations/india",
+    "updated": "2026-09-09"
+  },
+  {
+    "band_label": "A3 entry \u20b93.12\u20135.34L/yr",
+    "max_lpa": 5.34,
+    "min_lpa": 3.12,
+    "name": "Capgemini",
+    "source": "https://www.levels.fyi/companies/capgemini/salaries/software-engineer/levels/a3",
+    "updated": "2026-09-09"
+  },
+  {
+    "band_label": "L1 entry \u20b94.59\u20139.52L/yr",
+    "max_lpa": 9.52,
+    "min_lpa": 4.59,
+    "name": "Deloitte",
+    "source": "https://www.levels.fyi/companies/deloitte/salaries/software-engineer/levels/l1",
+    "updated": "2026-09-09"
+  },
+  {
+    "band_label": "SWE entry \u20b97.47\u201313.8L/yr",
+    "max_lpa": 13.8,
+    "min_lpa": 7.47,
+    "name": "EY",
+    "source": "https://www.levels.fyi/companies/ernst-and-young/salaries/software-engineer/levels/software-engineer",
+    "updated": "2026-09-09"
+  },
+  {
+    "band_label": "SWE entry \u20b96.86\u201317.9L/yr",
+    "max_lpa": 17.9,
+    "min_lpa": 6.86,
+    "name": "Paytm",
+    "source": "https://www.levels.fyi/companies/paytm/salaries/software-engineer/levels/software-engineer/locations/india",
+    "updated": "2026-09-09"
   }
 ]

@@ -30,7 +30,11 @@ FUZZY_CUTOFF = 0.8
 COMPANY_ALIASES = {
     "fb": "Meta",
     "facebook": "Meta",
-    "tata consultancy": "tcs",
+    "tata consultancy": "TCS",
+    "tata consultancy services": "TCS",
+    "tcs ninja": "TCS",
+    "tcs digital": "TCS",
+    "tcs prime": "TCS",
 }
 
 TOPIC_GLOSSARY = {
@@ -308,12 +312,14 @@ def company_profile(problems, companies, company, top_n=8, top_k=10):
     names = {canonical} if canonical else set()
     names |= {c["name"] for c in companies
               if canonical and _squash(c["name"]) == _squash(canonical)}
+    lower_names = {n.lower() for n in names if n}
     hits = [p for p in problems
-            if any(n in (p.get("companies") or {}) for n in names)]
+            if lower_names & {k.lower() for k in (p.get("companies") or {})}]
     if not hits:
         return None
     stored = next((c["name"] for c in companies if c["name"] in names), canonical)
-    freq_of = lambda p: sum(p["companies"][n] for n in names if n in p["companies"])
+    freq_of = lambda p: sum(v for k, v in p["companies"].items()
+                            if k.lower() in lower_names)
     topic_freq: dict = {}
     for p in hits:
         for t in p.get("topics", []):

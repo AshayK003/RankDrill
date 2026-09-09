@@ -119,6 +119,17 @@ def test_company_alias_resolves(monkeypatch):
     assert hits and hits[0]["detected_company"] == "J.P. Morgan"
 
 
+def test_tier_alias_routes_to_base_company(monkeypatch):
+    import recommender as rec
+
+    docs = [{**DOCS[0], "companies": {"tcs": 50.0}}]
+    corps = (docs, [{"name": "TCS", "band_label": "C1Y entry Rs.3-5L/yr"}])
+    monkeypatch.setattr(rec, "_load_corpus", lambda: corps)
+    hits = rec.recommend("TCS Digital OA with arrays", top_k=2, method="bm25")
+    assert hits and hits[0]["detected_company"] == "TCS"
+    assert hits[0]["salary_band"] == "C1Y entry Rs.3-5L/yr"
+
+
 def test_top_k_guards(monkeypatch):
     import recommender as rec
 
