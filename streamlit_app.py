@@ -74,7 +74,15 @@ if st.button("Rank problems", type="primary"):
                 hits = None
         if hits is not None:
             if not hits:
-                st.info("No matches. Try a longer description with skills and tools.")
+                diag = rec.diagnose_query(query.strip())
+                if diag["unknown"]:
+                    st.info(
+                        "No recognized DSA terms — these words matched nothing: "
+                        + ", ".join(diag["unknown"])
+                        + ". Add skills like arrays, dynamic programming, graphs, or SQL."
+                    )
+                else:
+                    st.info("No matches. Try a longer description with skills and tools.")
             else:
                 first = hits[0]
                 if first.get("corrections"):

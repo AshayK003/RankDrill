@@ -132,3 +132,20 @@ def test_empty_corpus(monkeypatch):
 
     monkeypatch.setattr(rec, "_load_corpus", lambda: ([], []))
     assert rec.recommend("arrays") == []
+
+
+def test_diagnose_flags_unknown_terms(monkeypatch):
+    import recommender as rec
+
+    monkeypatch.setattr(rec, "_load_corpus", lambda: (DOCS, {}))
+    diag = rec.diagnose_query("backend sde role")
+    assert diag["usable"] == [] and set(diag["unknown"]) == {"backend", "sde", "role"}
+
+
+def test_diagnose_counts_corrected_as_usable(monkeypatch):
+    import recommender as rec
+
+    monkeypatch.setattr(rec, "_load_corpus", lambda: (DOCS, {}))
+    diag = rec.diagnose_query("ararys")
+    assert diag["usable"] == ["arrays"]
+    assert diag["corrections"] == {"ararys": "arrays"}

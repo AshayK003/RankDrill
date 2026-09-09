@@ -223,6 +223,23 @@ def _salary_band(companies, company):
     return None
 
 
+def diagnose_query(query):
+    """Explain why a query may return nothing.
+
+    Returns {usable, unknown, corrections}. Usable = tokens (after typo
+    correction) present in the corpus vocabulary. Pure read path.
+    """
+    qtokens = preprocess(query)
+    try:
+        problems, _ = _load_corpus()
+    except FileNotFoundError:
+        return {"usable": [], "unknown": qtokens, "corrections": {}}
+    _, df, _, _ = _corpus_stats(problems)
+    usable, corrections = _correct_typos(qtokens, df)
+    unknown = [t for t in qtokens if t not in df and t not in corrections]
+    return {"usable": usable, "unknown": unknown, "corrections": corrections}
+
+
 def recommend(query, top_k=10, company=None, method="bm25"):
     """Rank problems for a raw query string. Returns ranked hit dicts."""
     if method not in ("bm25", "tfidf"):
