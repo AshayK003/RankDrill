@@ -240,7 +240,7 @@ def _boost(score, problem, company):
 
 def _canonical_company(name, companies):
     """Resolve aliases and punctuation variants to the stored company name."""
-    if not name:
+    if not isinstance(name, str) or not name.strip():
         return None
     lowered = name.lower().strip()
     if lowered in COMPANY_ALIASES:
@@ -405,9 +405,15 @@ def roadmap(problems, companies, targets, per_topic=3):
 
 def recommend(query, top_k=10, company=None, method="bm25"):
     """Rank problems for a raw query string. Returns ranked hit dicts."""
-    if method not in ("bm25", "tfidf"):
+    if isinstance(method, str) and method.lower() in ("bm25", "tfidf"):
+        method = method.lower()
+    else:
         raise ValueError(f"unknown method: {method}")
-    if top_k is None or top_k < 1:
+    try:
+        top_k = int(top_k)
+    except (TypeError, ValueError):
+        raise ValueError(f"top_k must be an integer, got {top_k!r}")
+    if top_k < 1:
         return []
     qtokens = preprocess(query)
     if not qtokens:
@@ -444,7 +450,7 @@ def recommend(query, top_k=10, company=None, method="bm25"):
             "link": p.get("link", ""),
             "score": round(score, 4),
             "matched_terms": sorted(set(qtokens) & dtoks),
-            "companies": p.get("companies", {}),
+            "companies": dict(p.get("companies", {})),
             "salary_band": _salary_band(companies, company),
             "detected_company": company,
             "corrections": corrections,

@@ -19,6 +19,7 @@ companies asked it recently, and the fresher pay band where verified.
 - **Transparent** — every hit lists matched terms and typo corrections. No black-box scores.
 - **Typo-tolerant** — misspellings fall back to the closest corpus term by edit distance.
 - **Company roadmaps** — pick target companies, get topics ordered by what they ask.
+- **Resume check** — paste resume + JD, see missing keywords ranked by JD frequency.
 
 ## Quick start
 

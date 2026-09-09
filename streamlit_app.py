@@ -40,7 +40,8 @@ except FileNotFoundError:
     st.error("Corpus not built yet. Run `python data/build_corpus.py` first.")
     st.stop()
 
-tab_rank, tab_company, tab_roadmap = st.tabs(["Recommend", "Company patterns", "Roadmaps"])
+tab_rank, tab_company, tab_roadmap, tab_resume = st.tabs(
+    ["Recommend", "Company patterns", "Roadmaps", "Resume check"])
 
 with tab_rank:
     _EXAMPLES = {
@@ -167,3 +168,29 @@ with tab_roadmap:
             for p in t["problems"]:
                 st.caption(f"{p['title']} [{p['difficulty']}] · asked {p['frequency']:.0f}")
                 st.link_button("Practice", p["link"])
+
+with tab_resume:
+    st.caption("Paste both as plain text (PDF upload not supported). Nothing leaves your browser session — no storage, no accounts.")
+    from resume_check import resume_gap
+
+    rc1, rc2 = st.columns(2)
+    with rc1:
+        resume_text = st.text_area("Your resume", height=200, placeholder="Backend projects in Python and Django. MySQL…")
+    with rc2:
+        jd_text = st.text_area("Job description", height=200, key="rc_jd",
+                               placeholder="Backend SDE-1: Python, Django, MySQL, Redis, Docker…")
+    if st.button("Check alignment", type="primary"):
+        if not resume_text.strip() or not jd_text.strip():
+            st.warning("Paste both texts first.")
+        else:
+            gap = resume_gap(resume_text, jd_text)
+            st.metric("Keyword coverage", f"{gap['coverage']:.0%}")
+            if gap["missing"]:
+                st.subheader("Missing (most-mentioned first)")
+                for m in gap["missing"][:15]:
+                    st.caption(f"{m['term']} · mentioned {m['jd_count']}x in JD")
+            else:
+                st.success("No missing keywords found. Tailor phrasing, not skills.")
+            if gap["matched"]:
+                with st.expander("Matched", expanded=False):
+                    st.caption(", ".join(m["term"] for m in gap["matched"]))

@@ -16,8 +16,15 @@ def main():
 
     try:
         hits = recommend(args.query, top_k=args.top_k, company=args.company, method=args.method)
-    except NotImplementedError as exc:
-        print(f"Engine not built yet: {exc}")
+    except FileNotFoundError:
+        print("Corpus not built yet. Run `python data/build_corpus.py` first.")
+        return
+    except ValueError as exc:
+        print(f"Bad input: {exc}")
+        return
+
+    if not hits:
+        print("No matches. Try a longer description with skills and tools.")
         return
 
     for rank, h in enumerate(hits, start=1):
