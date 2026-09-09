@@ -138,6 +138,7 @@ with tab_company:
     else:
         if prof["salary_band"]:
             st.caption(f"Fresher band: {prof['salary_band']}")
+        st.caption(f"OA meter: {prof['meter']['verdict']} (rule of thumb from ask-data)")
         m1, m2, m3, m4 = st.columns(4)
         m1.metric("Problems", prof["problem_count"])
         m2.metric("Easy", prof["difficulty"]["Easy"])

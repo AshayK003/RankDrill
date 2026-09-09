@@ -316,6 +316,26 @@ def to_checklist(query, company, method, hits):
     return "\n".join(lines) + "\n"
 
 
+def difficulty_meter(difficulty):
+    """Verdict flag from difficulty counts. Heuristic thresholds, disclosed in UI.
+
+    Returns {hard_share, verdict}. 'Expect Hard' at >=30% Hard, 'Speed round'
+    at >=60% Easy, else 'Balanced mix'. No data when total is 0.
+    """
+    total = sum(difficulty.values())
+    if total == 0:
+        return {"hard_share": 0.0, "verdict": "No data"}
+    hard_share = difficulty.get("Hard", 0) / total
+    easy_share = difficulty.get("Easy", 0) / total
+    if hard_share >= 0.3:
+        verdict = "Expect Hard"
+    elif easy_share >= 0.6:
+        verdict = "Speed round — accuracy over depth"
+    else:
+        verdict = "Balanced mix"
+    return {"hard_share": round(hard_share, 2), "verdict": verdict}
+
+
 def company_profile(problems, companies, company, top_n=8, top_k=10):
     """Aggregate ask-pattern for one company (pure function).
 
@@ -341,13 +361,15 @@ def company_profile(problems, companies, company, top_n=8, top_k=10):
         for t in p.get("topics", []):
             topic_freq[t] = topic_freq.get(t, 0) + freq_of(p)
     ranked = sorted(hits, key=lambda p: -freq_of(p))
+    diff_counts = {
+        level: sum(1 for p in hits if p.get("difficulty") == level)
+        for level in ("Easy", "Medium", "Hard")
+    }
     return {
         "name": stored,
         "problem_count": len(hits),
-        "difficulty": {
-            level: sum(1 for p in hits if p.get("difficulty") == level)
-            for level in ("Easy", "Medium", "Hard")
-        },
+        "difficulty": diff_counts,
+        "meter": difficulty_meter(diff_counts),
         "top_topics": sorted(topic_freq.items(), key=lambda kv: -kv[1])[:top_n],
         "top_problems": [
             {"id": p["id"], "title": p["title"], "difficulty": p.get("difficulty", "?"),
