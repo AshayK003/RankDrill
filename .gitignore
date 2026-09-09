@@ -1,0 +1,21 @@
+# Internal files
+internals/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Data and results
+data/*.json
+!data/.gitkeep
+results/
+!results/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db
