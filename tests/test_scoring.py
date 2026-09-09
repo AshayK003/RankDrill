@@ -149,3 +149,17 @@ def test_diagnose_counts_corrected_as_usable(monkeypatch):
     diag = rec.diagnose_query("ararys")
     assert diag["usable"] == ["arrays"]
     assert diag["corrections"] == {"ararys": "arrays"}
+
+
+def test_glossary_covers_leetcode_topic_names():
+    from recommender import _topic_phrases, preprocess
+
+    assert "hashmap" in preprocess(_topic_phrases("Hash Table"))
+    assert "dfs" in preprocess(_topic_phrases("Depth-First Search"))
+    assert "sql" in preprocess(_topic_phrases("Database"))
+
+
+def test_glossary_fallback_covers_unknown_topics():
+    from recommender import _topic_phrases, preprocess
+
+    assert preprocess(_topic_phrases("Boruvka's Algorithm")) != []

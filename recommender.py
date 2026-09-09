@@ -34,27 +34,83 @@ COMPANY_ALIASES = {
 }
 
 TOPIC_GLOSSARY = {
-    "arrays": "array list index elements subarray",
-    "hashing": "hash map set dictionary frequency counting",
-    "strings": "string text characters palindrome substring",
-    "two pointers": "two pointers left right converge",
-    "sliding window": "sliding window subarray substring contiguous",
+    # Keys are LeetCode topic names (lowercased). Values add synonyms and the
+    # JD words students actually type ("sql", "subarray", "shortest path").
+    "array": "array arrays list index elements subarray",
+    "arrays": "array arrays list index elements subarray",
+    "string": "string strings text characters palindrome substring",
+    "strings": "string strings text characters palindrome substring",
+    "hash table": "hash hashmap map set dictionary frequency counting",
+    "hashing": "hash hashmap map set dictionary frequency counting",
+    "dynamic programming": "dynamic programming dp memoization optimization knapsack subsequences",
+    "sorting": "sort sorted order merge intervals scheduling",
+    "math": "math modular arithmetic combinatorics probability",
+    "depth-first search": "dfs graph traversal recursion backtrack islands components",
     "binary search": "binary search sorted log time divide conquer",
-    "stack": "stack push pop lifo parentheses histogram",
-    "queue": "queue fifo bfs level",
-    "graphs": "graph nodes edges traversal bfs dfs connected components islands",
-    "depth first search": "dfs recursion traversal backtrack",
-    "breadth first search": "bfs queue level order traversal shortest path",
-    "dynamic programming": "dynamic programming dp memoization optimization knapsack subsequence",
-    "sorting": "sort order merge intervals scheduling",
-    "recursion": "recursion recursive backtracking",
-    "linked list": "linked list nodes pointers lru cache",
     "greedy": "greedy choice interval activity selection",
-    "heaps": "heap priority queue top k",
-    "bit manipulation": "bits xor mask powers of two",
-    "math": "math combinatorics probability modular",
+    "two pointers": "two pointers left right converge",
+    "breadth-first search": "bfs queue level order traversal shortest path islands",
+    "matrix": "matrix grid rows columns 2d island",
+    "tree": "tree trees nodes traversal",
+    "binary tree": "binary tree traversal inorder preorder postorder",
+    "prefix sum": "prefix sum cumulative subarray range sum",
+    "stack": "stack push pop lifo parentheses histogram monotonic",
+    "bit manipulation": "bits xor mask powers of two bitmask",
+    "heap (priority queue)": "heap priority queue top k largest smallest",
+    "heaps": "heap priority queue top k largest smallest",
+    "database": "database sql dbms query select join",
+    "simulation": "simulation simulate process steps",
+    "graph theory": "graph graphs nodes edges traversal components",
+    "graphs": "graph graphs nodes edges traversal components",
+    "sliding window": "sliding window subarray substring contiguous",
+    "linked list": "linked list nodes pointers lru cache",
+    "design": "design data structure implement lru cache",
+    "backtracking": "backtracking permutations combinations subsets",
+    "counting": "counting frequency occurrences",
+    "union-find": "union find disjoint set dsu connected components",
+    "divide and conquer": "divide conquer merge sort quicksort",
+    "recursion": "recursion recursive backtracking",
+    "monotonic stack": "monotonic stack next greater histogram",
+    "binary search tree": "bst binary search tree validate insert",
+    "ordered set": "ordered set balanced tree",
+    "number theory": "number theory prime gcd math",
+    "segment tree": "segment tree range query fenwick",
+    "trie": "trie prefix tree autocomplete",
     "tries": "trie prefix tree autocomplete",
+    "enumeration": "enumeration enumerate brute force list all",
+    "memoization": "memoization dp cache recursion",
+    "topological sort": "topological sort dag dependencies course schedule",
+    "data stream": "data stream online median moving",
+    "bracket sequences": "brackets parentheses valid stack",
+    "directed acyclic graph": "dag directed acyclic topological",
+    "bitmask": "bitmask bits dp mask subset",
+    "knapsack problem": "knapsack dp weight capacity",
+    "shortest path": "shortest path dijkstra bfs bellman ford",
+    "dp on trees": "tree dp dfs subtree",
+    "game theory": "game minimax nim optimal play",
+    "binary indexed tree": "fenwick bit range query",
+    "hash function": "hash rolling string matching",
+    "monotonic queue": "monotonic queue sliding window deque",
+    "string matching": "pattern matching kmp z algorithm substring search",
+    "minimax": "minimax game optimal",
+    "z algorithm": "z algorithm string matching",
+    "merge sort": "merge sort divide conquer",
+    "interactive": "interactive queries ask",
+    "doubly-linked list": "doubly linked list lru",
+    "counting sort": "counting sort linear",
+    "dijkstra's algorithm": "dijkstra shortest path graph",
+    "euclidean algorithm": "euclid gcd math",
+    "queue": "queue fifo bfs level",
 }
+
+
+def _topic_phrases(topic: str) -> str:
+    """Glossary enrichment for a topic, falling back to the topic's own words.
+
+    The fallback guarantees every topic — including rare ones like
+    "Boruvka's Algorithm" — contributes matchable vocabulary.
+    """
+    return TOPIC_GLOSSARY.get(topic.lower(), topic)
 
 _CACHE = {}
 
@@ -105,7 +161,7 @@ def _corpus_stats(problems):
     for p in problems:
         title_toks = preprocess(p["title"]) * TITLE_WEIGHT
         topic_text = " ".join(p.get("topics", [])) + " " + " ".join(
-            TOPIC_GLOSSARY.get(t.lower(), "") for t in p.get("topics", []))
+            _topic_phrases(t) for t in p.get("topics", []))
         doc_tokens[p["id"]] = title_toks + preprocess(topic_text)
     df = {}
     for toks in doc_tokens.values():
