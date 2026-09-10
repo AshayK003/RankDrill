@@ -24,6 +24,7 @@ companies asked it recently, and the fresher pay band where verified.
 - **Do-next links** — every result expands to co-asked problems ("solved it? do next").
 - **Readable results** — difficulty pills, relevance bars, and latency readout on every hit.
 - **Resume check** — paste resume + JD, see missing keywords ranked by JD frequency.
+- **Compare** — offers positioned against verified bands; companies side-by-side with shared/unique topics.
 
 ## Quick start
 
@@ -80,7 +81,7 @@ eval.py             P@5 / R@5 / MRR harness + runner
 streamlit_app.py    dashboard (thin surface over the engine)
 data/build_corpus.py  corpus builder (download → merge → problems.json)
 data/seeds/         frozen eval labels, seed problems, salary bands
-tests/              75 tests, all passing (incl. 5 headless AppTest UI flows)
+tests/              83 tests, all passing (incl. 6 headless AppTest UI flows)
 ```
 
 ## License

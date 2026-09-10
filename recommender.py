@@ -470,6 +470,71 @@ def do_next(problems, problem_id, top_n=5):
     return ranked[:top_n]
 
 
+def _band_position(companies, company, ctc):
+    """Position a CTC inside the verified band: (percentile|None, verdict)."""
+    try:
+        ctc = float(ctc)
+    except (TypeError, ValueError):
+        raise ValueError(f"ctc must be a number, got {ctc!r}")
+    canonical = _canonical_company(company, companies) or ""
+    row = next((c for c in companies if c["name"].lower() == canonical.lower()), None)
+    if row is None or row.get("min_lpa") is None or row.get("max_lpa") is None:
+        return None, "No verified band — compare on role and growth, not numbers"
+    lo, hi = row["min_lpa"], row["max_lpa"]
+    if hi == lo:
+        if ctc == lo:
+            return 100.0, "At the reported figure"
+        return (0.0, "Below the reported figure — negotiate up") if ctc < lo else \
+            (100.0, "Above reported range — verify in writing")
+    if ctc < lo:
+        return 0.0, "Below band — negotiate up or verify components"
+    if ctc > hi:
+        return 100.0, "Above band — verify in writing"
+    return round((ctc - lo) / (hi - lo) * 100, 1), "Inside band"
+
+
+def compare_offers(companies, offer_a, offer_b):
+    """Compare two {company, ctc_lpa} offers against verified bands (pure).
+
+    Returns {a{both with percentile+verdict}, b{...}, better ('A'/'B'/'Tie'/None)}.
+    better is None when either side lacks band data — no verdict without evidence.
+    """
+    out = {}
+    for key, offer in (("a", offer_a), ("b", offer_b)):
+        pct, verdict = _band_position(companies, offer.get("company"), offer.get("ctc_lpa"))
+        out[key] = {"company": offer.get("company"), "ctc_lpa": offer.get("ctc_lpa"),
+                    "percentile": pct, "verdict": verdict}
+    pa, pb = out["a"]["percentile"], out["b"]["percentile"]
+    if pa is None or pb is None:
+        better = None
+    elif pa > pb:
+        better = "A"
+    elif pb > pa:
+        better = "B"
+    else:
+        better = "Tie"
+    out["better"] = better
+    return out
+
+
+def compare_companies(problems, companies, name_a, name_b, top_n=8):
+    """Side-by-side ask-patterns plus shared/unique top topics (pure).
+
+    Returns None when either company has no data.
+    """
+    pa, pb = company_profile(problems, companies, name_a), company_profile(problems, companies, name_b)
+    if pa is None or pb is None:
+        return None
+    ta = [t for t, _ in pa["top_topics"][:top_n]]
+    tb = [t for t, _ in pb["top_topics"][:top_n]]
+    return {
+        "a": pa, "b": pb,
+        "shared_topics": [t for t in ta if t in tb],
+        "only_a": [t for t in ta if t not in tb],
+        "only_b": [t for t in tb if t not in ta],
+    }
+
+
 def recommend(query, top_k=10, company=None, method="bm25"):
     """Rank problems for a raw query string. Returns ranked hit dicts."""
     if isinstance(method, str) and method.lower() in ("bm25", "tfidf"):

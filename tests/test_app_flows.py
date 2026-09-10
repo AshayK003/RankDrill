@@ -30,7 +30,7 @@ def _click(at, label):
 
 def test_boot_clean_and_tabs_present():
     at = _boot()
-    assert len(at.tabs) == 4
+    assert len(at.tabs) == 5
     assert len(at.text_area) == 3
     assert at.selectbox[0].value == "Google"
 
@@ -65,3 +65,12 @@ def test_company_and_roadmap_tabs_render():
     assert len(at.metric) >= 4
     assert len(at.multiselect) == 1
     assert len(at.subheader) > 2
+
+
+def test_compare_tab_flows():
+    at = _boot()
+    at.number_input(key="cmp_a_ctc").set_value(23.0)
+    _click(at, "Compare offers")
+    assert not at.exception, f"offers exception: {at.exception}"
+    _click(at, "Compare companies")
+    assert not at.exception, f"companies exception: {at.exception}"

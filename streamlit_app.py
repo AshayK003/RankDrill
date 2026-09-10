@@ -50,8 +50,8 @@ except FileNotFoundError:
     st.error("Corpus not built yet. Run `python data/build_corpus.py` first.")
     st.stop()
 
-tab_rank, tab_company, tab_roadmap, tab_resume = st.tabs(
-    ["Recommend", "Company patterns", "Roadmaps", "Resume check"])
+tab_rank, tab_company, tab_roadmap, tab_resume, tab_compare = st.tabs(
+    ["Recommend", "Company patterns", "Roadmaps", "Resume check", "Compare"])
 
 with tab_rank:
     _EXAMPLES = {
@@ -246,3 +246,51 @@ with tab_resume:
             if gap["matched"]:
                 with st.expander("Matched", expanded=False):
                     st.caption(", ".join(m["term"] for m in gap["matched"]))
+
+with tab_compare:
+    st.subheader("Offers")
+    st.caption("Positioned against verified fresher bands. No band data, no verdict.")
+    banded = sorted({c["name"] for c in companies
+                     if c.get("min_lpa") is not None and c.get("max_lpa") is not None})
+    oc1, oc2 = st.columns(2)
+    with oc1:
+        a_name = st.selectbox("Offer A company", banded, key="cmp_a_name")
+        a_ctc = st.number_input("Offer A CTC (LPA)", min_value=0.0, value=10.0, key="cmp_a_ctc")
+    with oc2:
+        b_name = st.selectbox("Offer B company", banded, key="cmp_b_name")
+        b_ctc = st.number_input("Offer B CTC (LPA)", min_value=0.0, value=12.0, key="cmp_b_ctc")
+    if st.button("Compare offers", type="primary"):
+        res = rec.compare_offers(companies, {"company": a_name, "ctc_lpa": a_ctc},
+                                 {"company": b_name, "ctc_lpa": b_ctc})
+        for key, label in (("a", "Offer A"), ("b", "Offer B")):
+            pct = res[key]["percentile"]
+            pct_txt = f"{pct:.0f}% up its band" if pct is not None else "band unknown"
+            st.caption(f"{label} ({res[key]['company']}, Rs.{res[key]['ctc_lpa']}L): "
+                       f"{pct_txt} — {res[key]['verdict']}")
+        if res["better"] in ("A", "B"):
+            st.success(f"On pay position alone: Offer {res['better']} sits higher in its band.")
+        elif res["better"] == "Tie":
+            st.info("Both sit at the same band position — decide on role and growth.")
+        else:
+            st.info("No cross-offer verdict: band data missing on at least one side.")
+
+    st.subheader("Companies")
+    all_names = sorted({c for p in problems for c in (p.get("companies") or {})})
+    cc1, cc2 = st.columns(2)
+    with cc1:
+        ca = st.selectbox("Company A", all_names, key="cmp_co_a",
+                          index=all_names.index("Google") if "Google" in all_names else 0)
+    with cc2:
+        cb = st.selectbox("Company B", all_names, key="cmp_co_b",
+                          index=all_names.index("tcs") if "tcs" in all_names else 0)
+    if ca != cb and st.button("Compare companies", type="primary"):
+        cmp = rec.compare_companies(problems, companies, ca, cb)
+        if cmp is None:
+            st.info("No ask-data for at least one of these yet.")
+        else:
+            if cmp["shared_topics"]:
+                st.caption("Both ask: " + ", ".join(cmp["shared_topics"][:6]))
+            if cmp["only_a"]:
+                st.caption(f"Only {ca}: " + ", ".join(cmp["only_a"][:6]))
+            if cmp["only_b"]:
+                st.caption(f"Only {cb}: " + ", ".join(cmp["only_b"][:6]))
