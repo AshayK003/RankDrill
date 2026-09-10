@@ -20,6 +20,7 @@ companies asked it recently, and the fresher pay band where verified.
 - **Typo-tolerant** — misspellings fall back to the closest corpus term by edit distance.
 - **Company roadmaps** — pick target companies, get topics ordered by what they ask.
 - **Do-next links** — every result expands to co-asked problems ("solved it? do next").
+- **Readable results** — difficulty pills, relevance bars, and latency readout on every hit.
 - **Resume check** — paste resume + JD, see missing keywords ranked by JD frequency.
 
 ## Quick start
@@ -46,15 +47,15 @@ streamlit run streamlit_app.py
    any embeddings or training.
 3. **Rank** — hand-rolled BM25 Okapi or length-normalized TF-IDF, side by side.
    Company ask-frequency from the trailing six months multiplies the lexical score.
-4. **Evaluate** — Precision@5, Recall@5, MRR over 15 JD queries labelled *before*
+4. **Evaluate** — Precision@5, Recall@5, MRR, NDCG@5 over 15 JD queries labelled *before*
    the engine was built (`data/seeds/eval_queries.json`).
 
 ## Results
 
-| Ranker | P@5 | R@5 | MRR |
-|---|---|---|---|
-| BM25 | 0.560 | 0.024 | 0.617 |
-| TF-IDF | 0.520 | 0.022 | 0.572 |
+| Ranker | P@5 | R@5 | MRR | NDCG@5 |
+|---|---|---|---|---|
+| BM25 | 0.560 | 0.024 | 0.617 | 0.558 |
+| TF-IDF | 0.520 | 0.022 | 0.572 | 0.543 |
 
 R@5 is low by construction: relevance labels are topic-overlap, so the relevant set
 spans hundreds of problems at 1,119 docs. P@5 and MRR are the meaningful metrics —
@@ -77,7 +78,7 @@ eval.py             P@5 / R@5 / MRR harness + runner
 streamlit_app.py    dashboard (thin surface over the engine)
 data/build_corpus.py  corpus builder (download → merge → problems.json)
 data/seeds/         frozen eval labels, seed problems, salary bands
-tests/              47 tests, all passing
+tests/              75 tests, all passing (incl. 5 headless AppTest UI flows)
 ```
 
 ## License

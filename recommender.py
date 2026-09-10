@@ -68,7 +68,7 @@ TOPIC_GLOSSARY = {
     "graphs": "graph graphs nodes edges traversal components",
     "sliding window": "sliding window subarray substring contiguous",
     "linked list": "linked list nodes pointers lru cache",
-    "design": "design data structure implement lru cache",
+    "design": "design data structure implement lru cache rest api caching",
     "backtracking": "backtracking permutations combinations subsets",
     "counting": "counting frequency occurrences",
     "union-find": "union find disjoint set dsu connected components",
@@ -214,7 +214,9 @@ def _squash(text):
 def _correct_typos(qtokens, df):
     """Map unknown tokens to the closest corpus term (edit distance).
 
-    Returns (tokens, corrections). Unknown tokens with no close match are dropped.
+    Cutoff scales with token length: short tokens need >=0.9 similarity
+    ("redis" must not become "edits"), longer tokens use 0.8. Returns
+    (tokens, corrections). Unknown tokens with no close match are dropped.
     """
     vocab = list(df)
     fixed, corrections = [], {}
@@ -222,7 +224,8 @@ def _correct_typos(qtokens, df):
         if t in df:
             fixed.append(t)
             continue
-        close = difflib.get_close_matches(t, vocab, n=1, cutoff=FUZZY_CUTOFF)
+        cutoff = 0.9 if len(t) <= 5 else FUZZY_CUTOFF
+        close = difflib.get_close_matches(t, vocab, n=1, cutoff=cutoff)
         if close:
             fixed.append(close[0])
             corrections[t] = close[0]
@@ -314,6 +317,20 @@ def to_checklist(query, company, method, hits):
         if asked:
             lines.append(f"  asked by: {asked}")
     return "\n".join(lines) + "\n"
+
+
+_DIFFICULTY_CLASSES = {"Easy": "pill-easy", "Medium": "pill-medium", "Hard": "pill-hard"}
+
+
+def difficulty_badge(difficulty):
+    """Small HTML pill for a difficulty label (static markup only).
+
+    Unknown values collapse to a neutral badge, so upstream data can never
+    inject markup or text into the page. Pair with the .pill CSS classes.
+    """
+    css = _DIFFICULTY_CLASSES.get(difficulty, "pill-unknown")
+    label = difficulty if difficulty in _DIFFICULTY_CLASSES else "?"
+    return f'<span class="pill {css}">{label}</span>'
 
 
 def difficulty_meter(difficulty):

@@ -145,6 +145,21 @@ def test_empty_corpus(monkeypatch):
     assert rec.recommend("arrays") == []
 
 
+def test_difficulty_badge_classes():
+    from recommender import difficulty_badge
+
+    assert 'pill-easy' in difficulty_badge("Easy")
+    assert 'pill-medium' in difficulty_badge("Medium")
+    assert 'pill-hard' in difficulty_badge("Hard")
+
+
+def test_difficulty_badge_neutralizes_unknown():
+    from recommender import difficulty_badge
+
+    html = difficulty_badge("<script>alert(1)</script>")
+    assert "<script>" not in html and "pill-unknown" in html
+
+
 def test_checklist_format():
     from recommender import to_checklist
 
@@ -176,6 +191,20 @@ def test_diagnose_counts_corrected_as_usable(monkeypatch):
     diag = rec.diagnose_query("ararys")
     assert diag["usable"] == ["arrays"]
     assert diag["corrections"] == {"ararys": "arrays"}
+
+
+def test_short_tokens_not_force_corrected():
+    from recommender import _correct_typos
+
+    fixed, corrections = _correct_typos(["redis"], {"edits": 1, "arrays": 1})
+    assert fixed == [] and corrections == {}
+
+
+def test_long_typos_still_corrected():
+    from recommender import _correct_typos
+
+    fixed, corrections = _correct_typos(["traverals"], {"traversal": 1})
+    assert fixed == ["traversal"]
 
 
 def test_glossary_covers_leetcode_topic_names():

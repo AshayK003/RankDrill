@@ -5,15 +5,25 @@ terms render through Streamlit widgets, which escape HTML). Query text is capped
 at MAX_QUERY_CHARS. No secrets, uploads, or runtime network calls.
 """
 
+import time
+from html import escape
+
 import streamlit as st
 
 import recommender as rec
+from resume_check import resume_gap
 
 MAX_QUERY_CHARS = 2000
 
 st.set_page_config(page_title="RankDrill", layout="centered")
 st.markdown(
-    "<style>h1 {font-size: 2rem;} .stCaption {font-size: 0.85rem;}</style>",
+    "<style>h1 {font-size: 2rem;} .stCaption {font-size: 0.85rem;}"
+    " .pill {display:inline-block; padding:1px 10px; border-radius:9999px;"
+    " font-size:0.75rem; font-weight:600; white-space:nowrap;}"
+    " .pill-easy {background:#EDF3EC; color:#346538;}"
+    " .pill-medium {background:#FBF3DB; color:#956400;}"
+    " .pill-hard {background:#FDEBEC; color:#9F2F2D;}"
+    " .pill-unknown {background:#F0F0F0; color:#666;}</style>",
     unsafe_allow_html=True,
 )
 
@@ -69,7 +79,12 @@ with tab_rank:
     with col1:
         company = st.text_input("Company (optional)", placeholder="Flipkart")
     with col2:
-        method = st.radio("Ranker", ["bm25", "tfidf"], horizontal=True)
+        method = st.radio(
+            "Ranker",
+            ["bm25", "tfidf"],
+            format_func=lambda m: "BM25 (recommended)" if m == "bm25" else "TF-IDF (classic)",
+            horizontal=True,
+        )
     with col3:
         top_k = st.slider("Results", 5, 20, 10)
 
@@ -86,11 +101,14 @@ with tab_rank:
             st.warning("Paste a job description first.")
         else:
             with st.spinner("Ranking…"):
+                hits = None
+                elapsed = 0.0
                 try:
+                    t0 = time.perf_counter()
                     hits = _rank(query.strip(), top_k, company.strip(), method)
+                    elapsed = time.perf_counter() - t0
                 except Exception as exc:
                     st.error(f"Ranking failed: {exc}")
-                    hits = None
             if hits is not None:
                 if not hits:
                     diag = rec.diagnose_query(query.strip())
@@ -112,12 +130,14 @@ with tab_rank:
                         if first.get("salary_band"):
                             line += f" · {first['salary_band']}"
                         st.caption(line)
+                    st.caption(f"Ranked {len(problems)} problems in {elapsed:.2f}s")
+                    top_score = hits[0]["score"] or 1.0
                     for rank, h in enumerate(hits, start=1):
                         st.subheader(f"{rank}. {h['title']}")
-                        st.caption(
-                            f"{h['difficulty']} · score {h['score']:.3f} · "
-                            f"matched: {', '.join(h['matched_terms'])}"
-                        )
+                        st.markdown(rec.difficulty_badge(h["difficulty"]), unsafe_allow_html=True)
+                        st.caption(f"matched: {', '.join(h['matched_terms'])}")
+                        rel = min(h["score"] / top_score, 1.0)
+                        st.progress(rel, text=f"relevance {rel:.0%} of top hit")
                         if h.get("companies"):
                             top_cos = sorted(h["companies"].items(), key=lambda kv: -kv[1])[:3]
                             st.caption("Asked by: " + ", ".join(f"{c} ({n:.0f})" for c, n in top_cos))
@@ -127,10 +147,13 @@ with tab_rank:
                             if not nxt:
                                 st.caption("No co-asked problems found.")
                             for n in nxt:
-                                st.caption(
-                                    f"{n['title']} [{n['difficulty']}] · "
-                                    f"also asked by {', '.join(n['shared'][:2])}"
+                                st.markdown(
+                                    f"{rec.difficulty_badge(n['difficulty'])} "
+                                    f"{escape(n['title'])} · "
+                                    f"also asked by {escape(', '.join(n['shared'][:2]))}",
+                                    unsafe_allow_html=True,
                                 )
+                        st.divider()
                     st.download_button(
                         "Download prep checklist",
                         data=rec.to_checklist(query.strip(), company.strip(), method, hits),
@@ -158,7 +181,11 @@ with tab_company:
             st.caption(f"{topic} · {score:.0f}")
         st.subheader("Top problems")
         for p in prof["top_problems"]:
-            st.caption(f"{p['title']} [{p['difficulty']}] · asked {p['frequency']:.0f}")
+            st.markdown(
+                f"{rec.difficulty_badge(p['difficulty'])} {escape(p['title'])} · "
+                f"asked {p['frequency']:.0f}",
+                unsafe_allow_html=True,
+            )
             st.link_button("Practice", p["link"])
 
 with tab_roadmap:
@@ -176,12 +203,15 @@ with tab_roadmap:
         for i, t in enumerate(rm["topics"], start=1):
             st.subheader(f"{i}. {t['topic']}")
             for p in t["problems"]:
-                st.caption(f"{p['title']} [{p['difficulty']}] · asked {p['frequency']:.0f}")
+                st.markdown(
+                    f"{rec.difficulty_badge(p['difficulty'])} {escape(p['title'])} · "
+                    f"asked {p['frequency']:.0f}",
+                    unsafe_allow_html=True,
+                )
                 st.link_button("Practice", p["link"])
 
 with tab_resume:
     st.caption("Paste both as plain text (PDF upload not supported). Nothing leaves your browser session — no storage, no accounts.")
-    from resume_check import resume_gap
 
     _RC_EXAMPLE = {
         "resume": ("Final-year B.Tech project: REST APIs in Python and Django, MySQL database, "
