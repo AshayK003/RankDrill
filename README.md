@@ -1,5 +1,7 @@
 # RankDrill
 
+**Live app: https://rankdrill.streamlit.app/**
+
 Paste a job description. Get the DSA problems worth your hours.
 
 RankDrill is a text-based recommendation system for placement prep. Your job
